@@ -1,9 +1,9 @@
 
 
-const userDetailPage = () => {
+const UserDetailPage = () => {
   return (
-    <div>userDetailPage</div>
+    <div>UserDetailPage</div>
   )
 }
 
-export default userDetailPage
+export default UserDetailPage
