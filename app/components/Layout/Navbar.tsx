@@ -96,7 +96,7 @@ function Navbar() {
        }}
       >
        {pages.map((page) => (
-        <Link href={page.path}>
+        <Link href={page.path} key={page.name}>
 
          <MenuItem key={page.name} onClick={handleCloseNavMenu}>
           <Typography textAlign="center">{page.name}</Typography>
@@ -126,7 +126,7 @@ function Navbar() {
      </Typography>
      <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       {pages.map((page) => (
-       <Link href={page.path}>
+       <Link href={page.path} key={page.name}>
         <Button
          key={page.name}
          onClick={handleCloseNavMenu}
@@ -141,7 +141,7 @@ function Navbar() {
      <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+        <Avatar alt="Remy Sharp" />
        </IconButton>
       </Tooltip>
       <Menu
@@ -161,7 +161,7 @@ function Navbar() {
        onClose={handleCloseUserMenu}
       >
        {settings.map((setting) => (
-        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+        <MenuItem key={setting} onClick={handleCloseUserMenu} >
          <Typography textAlign="center">{setting}</Typography>
         </MenuItem>
        ))}

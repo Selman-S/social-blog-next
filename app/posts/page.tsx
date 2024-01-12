@@ -1,8 +1,15 @@
 
+import PostList from "../components/posts/postList";
 
 const PostsPage = () => {
+
+
+
+
   return (
-    <div>PostsPage</div>
+    <div>
+      <PostList />
+    </div>
   )
 }
 
