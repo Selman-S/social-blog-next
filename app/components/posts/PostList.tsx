@@ -1,32 +1,42 @@
 'use client'
 
-import { selectPost } from "@/lib/redux"
+import { PostSliceState, selectPost } from "@/lib/redux"
+import usePostCall from "@/service/usePostCall"
 import { Posts } from "@/types/postType"
+import { get } from "http"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 
 
 const PostList = () => {
+ // const { getPost } = usePostCall()
+ // const post: PostSliceState = useSelector(selectPost)
 
- const post: Posts = useSelector(selectPost)
- useEffect(() => {
+ // useEffect(() => {
+ //  getPost()
+ // }, [])
+ // console.log(post.data.data);
 
+ // if (post.loading) {
+ //  return <div>Loading...</div>
+ // }
+ // if (post.data.data.length === 0) {
+ //  return <div>No data</div>
 
- }
-  , [post])
+ // }
 
 
  return (
   <div>
-   {post.data.map((item, index) => {
+   {/* {post.data.data[0].map((item, index) => {
     return (
      <div key={index}>
       <h1>{item.text}</h1>
-      <p>{item.owner.firstName}</p>
+      <p></p>
      </div>
     )
    }
-   )}
+   )} */}
   </div>
  )
 }

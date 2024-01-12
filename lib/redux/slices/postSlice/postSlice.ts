@@ -1,6 +1,8 @@
 /* Core */
 import { Posts } from '@/types/postType'
 import { createSlice } from '@reduxjs/toolkit'
+import { getPost } from './thunks'
+
 
 
 /* Instruments */
@@ -10,14 +12,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState: PostSliceState = {
-  data: {
-    data: [],
-    total: 0,
-    page: 0,
-    limit: 0
-  },
+  data: [],
   loading: false,
-  error: null
+  error: null,
 }
 
 export const postSlice = createSlice({
@@ -25,40 +22,51 @@ export const postSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    fetchStart: (state) => {
-      state.loading = true
-    },
-    setPosts: (state, action) => {
-      state.data = action.payload
-      state.loading = false
-    },
-    setPost: (state, action) => {
-      state.data.data.push(action.payload)
-      state.loading = false
-    },
-    updatePost: (state, action) => {
-      const index = state.data.data.findIndex(post => post.id === action.payload.id)
-      state.data.data[index] = action.payload
-      state.loading = false
-    },
-    deletePost: (state, action) => {
-      state.data.data = state.data.data.filter(post => post.id !== action.payload)
-      state.loading = false
-    },
-    fetchError: (state, action) => {
-      state.error = action.payload
-      state.loading = false
-    },
+    // fetchStart: (state) => {
+    //   state.loading = true
+    // },
+    // setPosts: (state, action) => {
+    //   state.data = action.payload
+    //   state.loading = false
+    // },
+    // setPost: (state, action) => {
+    //   state.data.data.push(action.payload)
+    //   state.loading = false
+    // },
+    // updatePost: (state, action) => {
+    //   const index = state.data.data.findIndex(post => post.id === action.payload.id)
+    //   state.data.data[index] = action.payload
+    //   state.loading = false
+    // },
+    // deletePost: (state, action) => {
+    //   state.data.data = state.data.data.filter(post => post.id !== action.payload)
+    //   state.loading = false
+    // },
+    // fetchError: (state, action) => {
+    //   state.error = action.payload
+    //   state.loading = false
+    // },
   
     
   },
-
+  extraReducers: (builder) => {
+    builder
+      .addCase(getPost.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getPost.fulfilled, (state, action) => {
+        state.loading = false
+      
+        
+        state.data.push(action.payload)
+      })
+  },
 
 })
 
 /* Types */
 export interface PostSliceState {
-  data:Posts
+  data:Posts[]
   loading: boolean
   error: null | string
 }

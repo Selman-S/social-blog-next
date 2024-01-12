@@ -1,5 +1,6 @@
+import PostList from "../components/posts/PostList"
 
-import PostList from "../components/posts/postList";
+
 
 const PostsPage = () => {
 
