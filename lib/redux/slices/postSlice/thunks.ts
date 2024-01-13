@@ -1,15 +1,18 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
-import { getPosts } from './service/getPosts'
+import { fetchPost } from './service/postServices'
 
-export const getPost = createAppAsyncThunk(
-  'get/getPosts',
+
+export const getPostWithThunk = createAppAsyncThunk(
+  'get/getPostWithThunk',
   async () => {
-    const response = await getPosts()
+    const response = await fetchPost()
+    
 
-
+    
     // The value we return becomes the `fulfilled` action payload
     return response.data
   }
 )
+
 

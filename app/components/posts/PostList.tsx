@@ -1,42 +1,29 @@
 'use client'
 
-import { PostSliceState, selectPost } from "@/lib/redux"
-import usePostCall from "@/service/usePostCall"
-import { Posts } from "@/types/postType"
-import { get } from "http"
+import { selectPost } from "@/lib/redux"
+import usePostsCall from "@/service/usePostsCall"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
+import PostCard from "./PostCard"
 
 
 const PostList = () => {
- // const { getPost } = usePostCall()
- // const post: PostSliceState = useSelector(selectPost)
+ const posts = useSelector(selectPost);
 
- // useEffect(() => {
- //  getPost()
- // }, [])
- // console.log(post.data.data);
+ const { getPosts } = usePostsCall()
+ useEffect(() => {
+  getPosts()
+  console.log(posts);
 
- // if (post.loading) {
- //  return <div>Loading...</div>
- // }
- // if (post.data.data.length === 0) {
- //  return <div>No data</div>
+ }, [])
 
- // }
 
 
  return (
-  <div>
-   {/* {post.data.data[0].map((item, index) => {
-    return (
-     <div key={index}>
-      <h1>{item.text}</h1>
-      <p></p>
-     </div>
-    )
-   }
-   )} */}
+  <div className="mt-12 flex flex-wrap justify-center mx-auto gap-8">
+   {posts.data.map((post) => (
+    <PostCard post={post} key={post.id} />
+   ))}
   </div>
  )
 }

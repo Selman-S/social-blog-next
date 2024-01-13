@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/photo**',
       },
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me',
+        port: '',
+        pathname: '/api/portraits/**',
+      },
     ],
   },
 }

@@ -1,7 +1,7 @@
 /* Core */
 import { Posts } from '@/types/postType'
 import { createSlice } from '@reduxjs/toolkit'
-import { getPost } from './thunks'
+import { getPostWithThunk } from './thunks'
 
 
 
@@ -22,43 +22,33 @@ export const postSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    // fetchStart: (state) => {
-    //   state.loading = true
-    // },
-    // setPosts: (state, action) => {
-    //   state.data = action.payload
-    //   state.loading = false
-    // },
-    // setPost: (state, action) => {
-    //   state.data.data.push(action.payload)
-    //   state.loading = false
-    // },
-    // updatePost: (state, action) => {
-    //   const index = state.data.data.findIndex(post => post.id === action.payload.id)
-    //   state.data.data[index] = action.payload
-    //   state.loading = false
-    // },
-    // deletePost: (state, action) => {
-    //   state.data.data = state.data.data.filter(post => post.id !== action.payload)
-    //   state.loading = false
-    // },
-    // fetchError: (state, action) => {
-    //   state.error = action.payload
-    //   state.loading = false
-    // },
+    fetchStart: (state) => {
+      state.loading = true
+    },
+    setPosts: (state, action) => {
+      state.data = action.payload
+      state.loading = false
+    },
+
+    fetchError: (state, action) => {
+      state.error = action.payload
+      state.loading = false
+    },
   
     
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPost.pending, (state) => {
-        state.loading = true
-      })
-      .addCase(getPost.fulfilled, (state, action) => {
-        state.loading = false
-      
-        
+     .addCase(getPostWithThunk.pending, (state) => {
+       state.loading = true
+     })
+      .addCase(getPostWithThunk.fulfilled, (state, action) => {
         state.data = action.payload
+        state.loading = false
+      })
+      .addCase(getPostWithThunk.rejected, (state, action) => {
+        state.error = 'Error'
+        state.loading = false
       })
   },
 

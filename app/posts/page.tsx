@@ -4,8 +4,7 @@ import PostList from "../components/posts/PostList"
 
 const PostsPage = () => {
 
-
-
+ 
 
   return (
     <div>
