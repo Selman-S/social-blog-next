@@ -1,6 +1,6 @@
 import { Post, Posts } from "@/types/postType";
 
-export const fetchPost = async (
+export const getPosts = async (
   
 ): Promise<{ data : Posts }> => {
   const headers = new Headers();

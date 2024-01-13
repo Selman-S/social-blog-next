@@ -58,7 +58,7 @@ export const postSlice = createSlice({
         state.loading = false
       
         
-        state.data.push(action.payload)
+        state.data = action.payload
       })
   },
 
@@ -66,7 +66,7 @@ export const postSlice = createSlice({
 
 /* Types */
 export interface PostSliceState {
-  data:Posts[]
+  data:Posts
   loading: boolean
   error: null | string
 }
