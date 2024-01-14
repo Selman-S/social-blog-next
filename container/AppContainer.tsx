@@ -22,7 +22,7 @@ function AppContainer({ children }: PropsWithChildren) {
 
     return (
         <div
-            className="relative  text-sm "
+            className="relative  text-sm bg-loginbg"
         >
             {children}
         </div>

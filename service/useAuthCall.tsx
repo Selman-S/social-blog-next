@@ -76,12 +76,13 @@ const useAuthCall = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        const { email, displayName, photoURL, stsTokenManager:{accessToken,refreshToken} } = user;
+        const { email, displayName, photoURL, stsTokenManager: { accessToken, refreshToken } } = user;
         const curUser = {
           email,
           displayName,
           photoURL,
-          accessToken
+          accessToken,
+          refreshToken
         }
         dispatch(userSlice.actions.setCurrentUser(curUser))
       } else {

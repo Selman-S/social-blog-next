@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className=" container mt-5 flex flex-wrap gap-5 mx-auto justify-center  ">
+      <div className=" container mt-5 flex flex-wrap gap-5 mx-auto justify-center   ">
         <div>
 
           {postState.data.map((post) => (

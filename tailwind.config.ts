@@ -17,7 +17,7 @@ const config: Config = {
       },
     },
     colors: {
-      main: "#1877f2",
+      mainB: "#1877f2",
       loginbg: "#f0f2f5",
       white: "#ffffff",
       borderGray: " #dddfe2",
