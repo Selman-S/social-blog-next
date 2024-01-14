@@ -1,7 +1,7 @@
 import { getPostWithThunk } from "@/lib/redux/slices/postSlice/thunks"
-import { reduxStore } from "../lib/redux/store"
+import { reduxStore } from "../../lib/redux/store"
 import Image from "next/image"
-import PostCard from "./components/posts/PostCard"
+import PostCard from "../components/posts/PostCard"
 import { getUserWithThunk } from "@/lib/redux/slices/userSlice/thunks"
 
 

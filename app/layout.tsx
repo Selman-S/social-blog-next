@@ -23,9 +23,9 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-            <DefaultLayout>
-              {children}
-            </DefaultLayout>
+
+            {children}
+
 
           </AppRouterCacheProvider>
         </body>

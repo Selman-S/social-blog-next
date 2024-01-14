@@ -15,6 +15,7 @@ const initialState: UserSliceState = {
   data: [],
   loading: false,
   error: null,
+  currentUser: null,
 }
 
 export const userSlice = createSlice({
@@ -33,6 +34,9 @@ export const userSlice = createSlice({
     fetchError: (state, action) => {
       state.error = action.payload
       state.loading = false
+    },
+    setCurrentUser: (state, action) => {
+      state.currentUser = action.payload
     },
   
     
@@ -59,4 +63,5 @@ export interface UserSliceState {
   data:Owner[]
   loading: boolean
   error: null | string
+  currentUser: null | Owner
 }
