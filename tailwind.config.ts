@@ -18,6 +18,11 @@ const config: Config = {
     colors: {
       main: "#1877f2",
       loginbg: "#f0f2f5",
+      white: "#ffffff",
+      borderGray: " #dddfe2",
+      black: "#000000",
+      btnGreen: "#42b72a",
+      
     },
   },
   plugins: [],
