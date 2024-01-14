@@ -11,7 +11,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Post } from '@/types/postType';
+import { Post } from '@/types/types';
 import Image from 'next/image';
 import { Button } from '@mui/material';
 import Link from 'next/link';

@@ -1,7 +1,7 @@
 "use client"
 
 import usePostsCall from "@/service/usePostsCall"
-import { Post } from "@/types/postType"
+import { Post } from "@/types/types"
 import { Button, Skeleton } from "@mui/material"
 import { useEffect, useState } from "react"
 

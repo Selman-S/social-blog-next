@@ -1,14 +1,14 @@
-import {  Posts} from "@/types/types";
+import {  Owner} from "@/types/types";
 import { fetcher } from "./fetcher";
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
 
-export const fetchPost = async (
+export const fetchUser = async (
   
-): Promise<{ data : Posts }> => {
- const response = await fetcher('/post')
+): Promise<{ data : Owner[] }> => {
+ const response = await fetcher('/user')
  return response;
 }
 

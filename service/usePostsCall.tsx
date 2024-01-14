@@ -23,24 +23,27 @@ const usePostsCall = () => {
 
  const getPostById = async (id: string) => {
 
-
   try {
    const response = await axiosWithAppId(`/post/${id}`)
-
-
-
    return response
   } catch (error) {
    console.log(error);
-
-
   }
+ }
 
+ const createPost = async (post: {
+
+ }) => {
+
+  try {
+   const response = await axiosWithAppId(`/post/create`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
  }
 
  return { getPosts, getPostById }
-
-
 
 }
 

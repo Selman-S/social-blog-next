@@ -1,12 +1,14 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
-import { fetchPost } from './service/postServices'
+
+import { fetchUser } from './service/userServices'
 
 
-export const getPostWithThunk = createAppAsyncThunk(
-  'get/getPostWithThunk',
+
+export const getUserWithThunk = createAppAsyncThunk(
+  'get/getUserWithThunk',
   async () => {
-    const response = await fetchPost()
+    const response = await fetchUser()
     
 
     
@@ -14,6 +16,5 @@ export const getPostWithThunk = createAppAsyncThunk(
     return response.data
   }
 )
-
 
 

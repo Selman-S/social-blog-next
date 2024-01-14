@@ -1,7 +1,7 @@
 /* Core */
-import { Posts } from '@/types/types'
+import { Owner } from '@/types/types'
 import { createSlice } from '@reduxjs/toolkit'
-import { getPostWithThunk } from './thunks'
+import { getUserWithThunk } from './thunks'
 
 
 
@@ -11,21 +11,21 @@ import { getPostWithThunk } from './thunks'
 
 
 
-const initialState: PostSliceState = {
+const initialState: UserSliceState = {
   data: [],
   loading: false,
   error: null,
 }
 
-export const postSlice = createSlice({
-  name: 'post',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     fetchStart: (state) => {
       state.loading = true
     },
-    setPosts: (state, action) => {
+    setUsers: (state, action) => {
       state.data = action.payload
       state.loading = false
     },
@@ -39,14 +39,14 @@ export const postSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-     .addCase(getPostWithThunk.pending, (state) => {
+     .addCase(getUserWithThunk.pending, (state) => {
        state.loading = true
      })
-      .addCase(getPostWithThunk.fulfilled, (state, action) => {
+      .addCase(getUserWithThunk.fulfilled, (state, action) => {
         state.data = action.payload
         state.loading = false
       })
-      .addCase(getPostWithThunk.rejected, (state, action) => {
+      .addCase(getUserWithThunk.rejected, (state, action) => {
         state.error = 'Error'
         state.loading = false
       })
@@ -55,8 +55,8 @@ export const postSlice = createSlice({
 })
 
 /* Types */
-export interface PostSliceState {
-  data:Posts
+export interface UserSliceState {
+  data:Owner[]
   loading: boolean
   error: null | string
 }
