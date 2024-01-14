@@ -1,5 +1,5 @@
+import { fetcherForThunk } from "@/service/fetcherForThunk";
 import {  Posts} from "@/types/types";
-import { fetcher } from "./fetcher";
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
@@ -8,7 +8,7 @@ import { fetcher } from "./fetcher";
 export const fetchPost = async (
   
 ): Promise<{ data : Posts }> => {
- const response = await fetcher('/post')
+ const response = await fetcherForThunk('/post')
  return response;
 }
 

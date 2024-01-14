@@ -11,15 +11,15 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Post } from '@/types/types';
+import { Owner } from '@/types/types';
 import Image from 'next/image';
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import usePostsCall from '@/service/usePostsCall';
+import useUsersCall from '@/service/useUsersCall';
 
-export default function PostCard({ post }: { post: Post }) {
+export default function UserCard({ user }: { user: Owner }) {
 
- const { deletePost } = usePostsCall()
+ const { deleteUser } = useUsersCall()
 
 
 
@@ -29,7 +29,7 @@ export default function PostCard({ post }: { post: Post }) {
    <CardHeader
     avatar={
      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-      <Image src={post.owner?.picture} alt={post.owner?.firstName} width={40} height={40} />
+      <Image src={user.picture} alt={user.firstName} width={40} height={40} />
      </Avatar>
     }
     action={
@@ -37,25 +37,25 @@ export default function PostCard({ post }: { post: Post }) {
       <MoreVertIcon />
      </IconButton>
     }
-    title={post.owner?.firstName + ' ' + post.owner?.lastName}
-    subheader={post.publishDate}
+    title={user.firstName + ' ' + user.lastName}
+    subheader={user.id}
    />
    <Image
-    src={post.image}
+    src={user.picture}
     width={345}
     height={200}
-    alt={post.text}
+    alt={user.firstName}
    />
    <CardContent>
     <Typography variant="body2" color="text.secondary">
-     {post.text}
+     {user.firstName}
     </Typography>
    </CardContent>
    <CardActions disableSpacing>
-    <Link href={`/posts/${post.id}`}>
+    <Link href={`/users/${user.id}`}>
      Düzenle
     </Link>
-    <Button onClick={() => deletePost(post.id)} size="small" color="secondary">
+    <Button onClick={() => deleteUser(user.id)} size="small" color="secondary">
      Sil
     </Button>
 

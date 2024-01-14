@@ -2,8 +2,11 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
 import { postSlice } from "@/lib/redux"
+import { PostCreate } from "@/types/types"
 
-
+// Get List,
+// Get List By User, Get List By Tag, Get Post By Id,
+// Create Post, Update Post, Delete Post
 const usePostsCall = () => {
  const dispatch = useDispatch()
  const { axiosWithAppId } = useAxios()
@@ -31,19 +34,31 @@ const usePostsCall = () => {
   }
  }
 
- const createPost = async (post: {
-
- }) => {
+ const createPost = async (post: PostCreate) => {
 
   try {
-   const response = await axiosWithAppId(`/post/create`)
+   const response = await axiosWithAppId.post(`/post/create`, post)
+   console.log(response.data);
+
    return response
   } catch (error) {
    console.log(error);
   }
  }
 
- return { getPosts, getPostById }
+ const deletePost = async (id: string) => {
+
+  try {
+   const response = await axiosWithAppId.delete(`/post/${id}`)
+   console.log(response.data);
+
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+ }
+
+ return { getPosts, getPostById, createPost, deletePost }
 
 }
 

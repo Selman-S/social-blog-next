@@ -1,8 +1,12 @@
+import UserList from "../components/users/UserList"
 
 
 const Userspage = () => {
   return (
-    <div>Userspage</div>
+    <div>
+      <h1>User List</h1>
+      <UserList />
+    </div>
   )
 }
 

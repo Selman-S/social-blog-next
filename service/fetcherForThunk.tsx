@@ -1,5 +1,5 @@
 
-export const fetcher = async (url: string, method = 'GET') => {
+export const fetcherForThunk = async (url: string, method = 'GET') => {
  const headers = new Headers();
  headers.append('Content-Type', 'application/json');
  headers.append('app-id', process.env.NEXT_PUBLIC_APP_ID || '');
