@@ -1,5 +1,4 @@
 
-import Link from 'next/link';
 import LoginForm from '@/app/components/login/LoginForm';
 import GoogleButton from '@/app/components/login/GoogleButton';
 import SignUpButton from '@/app/components/login/SignUpButton';
@@ -8,8 +7,6 @@ import SignUpButton from '@/app/components/login/SignUpButton';
 const LoginCover = () => {
 
 
- const errorMessage = ''
- const isAuthenticating = false
  return (
   <div className="min-h-screen text-black dark:text-white-dark bg-loginbg">
 
@@ -22,7 +19,7 @@ const LoginCover = () => {
      <p className="mb-4   text-2xl text-black">Communicate with your friends and share what's going on in your life with Socialblog.</p>
     </div>
     <div className="relative flex w-full items-center justify-center lg:w-1/2">
-     <div className='loginbox'>
+     <div className='loginbox w-[350px] sm:w-[396px]'>
 
 
       <div className="max-w-[480px] p-5">
@@ -42,7 +39,7 @@ const LoginCover = () => {
        </div>
        <div className="text-center">
         Dont&apos;t have an account ?
-        <div>
+        <div className='mt-5'>
 
          <SignUpButton />
         </div>

@@ -1,5 +1,5 @@
 /* Core */
-import { Owner } from '@/types/types'
+import { CurrentUser, Owner } from '@/types/types'
 import { createSlice } from '@reduxjs/toolkit'
 import { getUserWithThunk } from './thunks'
 
@@ -63,5 +63,5 @@ export interface UserSliceState {
   data:Owner[]
   loading: boolean
   error: null | string
-  currentUser: null | Owner
+  currentUser: null  | CurrentUser
 }

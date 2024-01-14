@@ -1,3 +1,4 @@
+import { red } from '@mui/material/colors'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -22,6 +23,7 @@ const config: Config = {
       borderGray: " #dddfe2",
       black: "#000000",
       btnGreen: "#42b72a",
+      red: "#ff0000",
       
     },
   },
