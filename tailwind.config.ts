@@ -17,13 +17,14 @@ const config: Config = {
       },
     },
     colors: {
-      mainB: "#1877f2",
+      main: "#1877f2",
       loginbg: "#f0f2f5",
       white: "#ffffff",
       borderGray: " #dddfe2",
       black: "#000000",
       btnGreen: "#42b72a",
       red: "#ff0000",
+      linkColor: "#65676b"
       
     },
   },

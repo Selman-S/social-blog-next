@@ -1,5 +1,6 @@
-import CreatePost from "../components/posts/CreatePost"
-import PostList from "../components/posts/PostList"
+import CreatePost from "@/app/components/posts/CreatePost"
+import PostList from "@/app/components/posts/PostList"
+
 
 
 
