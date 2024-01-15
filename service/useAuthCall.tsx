@@ -18,6 +18,8 @@ import { userSlice } from '@/lib/redux/slices/userSlice';
 const useAuthCall = () => {
   const dispatch = useDispatch()
   useEffect(() => {
+    console.log('useAuthCall');
+
     userObserver();
   }, []);
 
@@ -75,6 +77,7 @@ const useAuthCall = () => {
     //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user);
 
         const { email, displayName, photoURL, stsTokenManager: { accessToken, refreshToken } } = user;
         const curUser = {
@@ -88,12 +91,15 @@ const useAuthCall = () => {
       } else {
         // User is signed out
         // setCurrentUser(false);
+        dispatch(userSlice.actions.setCurrentUser(null))
         // sessionStorage.removeItem("user");
       }
     });
   };
 
   const logOut = () => {
+    console.log('logout');
+    userObserver();
     signOut(auth);
     // toastSuccessNotify("Logged out successfully");
   };
@@ -130,7 +136,7 @@ const useAuthCall = () => {
   };
 
 
-  return { registerWithEmail }
+  return { registerWithEmail, logOut, userObserver }
 }
 
 export default useAuthCall
