@@ -3,6 +3,8 @@ import { reduxStore } from "../../lib/redux/store"
 import Image from "next/image"
 import PostCard from "../components/posts/PostCard"
 import { getUserWithThunk } from "@/lib/redux/slices/userSlice/thunks"
+import UserList from "../components/users/UserList"
+import PostList from "../components/posts/PostList"
 
 
 export default async function Home() {
@@ -16,28 +18,23 @@ export default async function Home() {
 
   return (
     <>
-      <div className=" container mt-5 flex flex-wrap gap-5 mx-auto justify-center   ">
-        <div>
+      <div className=" flex flex-wrap gap-5 mx-auto justify-between  ">
 
-          {postState.data.map((post) => (
+        <UserList userState={userState.data} />
+
+
+
+        <div>
+          <PostList />
+
+          {/* {postState.data.map((post) => (
 
             <PostCard key={post.id} post={post} />
           ))
-          }
+          } */}
         </div>
-        <div>
-          {
-            userState.data.map((user) => (
-              <div className="flex flex-col items-center justify-center gap-5" key={user.id}>
-                <Image src={user.picture} alt={user.firstName} width={100} height={100} className="rounded-full" />
-                <p>{user.firstName}</p>
-                <p>{user.lastName}</p>
+        <div>right</div>
 
-              </div>
-            ))
-          }
-
-        </div>
       </div>
 
     </>

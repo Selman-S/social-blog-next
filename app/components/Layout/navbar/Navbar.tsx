@@ -100,6 +100,7 @@ function Navbar() {
 										return (
 											<div className="profile-menu-item mt-2 block p-4 hover:bg-loginbg  rounded-md cursor-pointer"
 												onClick={() => { handleCloseUserMenu(); logOut() }}
+												key={setting.name}
 											>
 												<div className="flex gap-2"	>{setting.icon}{setting.name}</div>
 											</div>

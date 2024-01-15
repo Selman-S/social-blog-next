@@ -16,7 +16,7 @@ const loginSchema = yup.object({
   .matches(/\d+/, "Password must contain at least one digit")
   .matches(/[a-z]/, "Password must contain at least one lowercase letter")
   .matches(/[A-Z]/, "Password must contain at least one uppercase letter"),
- displayname: yup.string().required("Name is required.").min(3, "Name must be at least 3 characters long"),
+ // displayname: yup.string().required("Name is required.").min(3, "Name must be at least 3 characters long"),
 });
 
 type FormData = yup.InferType<typeof loginSchema>;
@@ -26,11 +26,11 @@ const LoginForm = () => {
   resolver: yupResolver(loginSchema)
  });
 
- const { registerWithEmail } = useAuthCall();
+ const { registerWithEmail, signIn, signUpWithGoogle } = useAuthCall();
 
  const onSubmit = (data: FormData, event: React.FormEvent) => {
   event.preventDefault();
-  registerWithEmail(data.email, data.password, data.displayname)
+  signIn(data.email, data.password)
 
  }
 
@@ -53,14 +53,14 @@ const LoginForm = () => {
 
     autoFocus />
 
-   <input
+   {/* <input
     className='p-2 border rounded-lg  border-borderGray w-full'
     required
     id="displayname"
     placeholder="Name"
     {...register("displayname")}
 
-   />
+   /> */}
 
    <input
     required

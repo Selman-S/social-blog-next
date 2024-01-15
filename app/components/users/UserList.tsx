@@ -1,33 +1,31 @@
 'use client'
 
-import { selectPost } from "@/lib/redux"
-import useUsersCall from "@/service/useUsersCall"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
-import UserCard from "./UserCard"
-import { selectUser } from "@/lib/redux/slices/userSlice"
+import { Owner } from "@/types/types"
+import Image from "next/image"
+
+type Props = {
+	userState: Owner[]
+}
+
+const UserList = ({ userState }: Props) => {
 
 
-const UserList = () => {
- const users = useSelector(selectUser);
-
- const { getUsers } = useUsersCall()
- useEffect(() => {
-  getUsers()
-  console.log(users);
-
- }, [])
+	return (
+		<div className=" flex flex-wrap flex-col w-[360px]  p-4 ">
+			{
+				userState.map((user) => (
+					<div className="flex p-2 items-center cursor-pointer gap-5 text-[15px] leading-5 font-semibold text-textBlack hover:bg-userLinkHover  rounded-lg" key={user.id}>
+						<Image src={user.picture} alt={user.firstName} width={40} height={40} className="rounded-full" />
+						<div>{user.firstName} {user.lastName}</div>
 
 
+					</div>
+				))
+			}
 
- return (
-  <div className="mt-12 flex flex-wrap justify-center mx-auto gap-8">
-   user
-   {users.data.map((user) => (
-    <UserCard user={user} key={user.id} />
-   ))}
-  </div>
- )
+
+		</div>
+	)
 }
 
 export default UserList

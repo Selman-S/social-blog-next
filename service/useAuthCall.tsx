@@ -14,9 +14,14 @@ import {
 import { auth } from '@/auth/firebase/firebase';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '@/lib/redux/slices/userSlice';
+import { useRouter } from 'next/navigation';
 
 const useAuthCall = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+
+
   useEffect(() => {
     console.log('useAuthCall');
 
@@ -40,8 +45,8 @@ const useAuthCall = () => {
         console.error('No user is currently signed in');
       }
 
-      dispatch(userSlice.actions.setCurrentUser(auth.currentUser))
-
+      // dispatch(userSlice.actions.setCurrentUser(auth.currentUser))
+      // router.push('/')
 
 
       // console.log(userCredential);
@@ -67,6 +72,7 @@ const useAuthCall = () => {
       // console.log(userCredential);
       // navigate("/");
       // toastSuccessNotify("Logged in successfully!");
+      // router.push('/')
     } catch (error) {
       console.log(error);
       // toastErrorNotify(error.message);
@@ -88,6 +94,7 @@ const useAuthCall = () => {
           refreshToken
         }
         dispatch(userSlice.actions.setCurrentUser(curUser))
+        router.push('/')
       } else {
         // User is signed out
         // setCurrentUser(false);
@@ -99,7 +106,7 @@ const useAuthCall = () => {
 
   const logOut = () => {
     console.log('logout');
-    userObserver();
+
     signOut(auth);
     // toastSuccessNotify("Logged out successfully");
   };
@@ -109,7 +116,7 @@ const useAuthCall = () => {
   //! Google ile girişi enable yap
   //* => Authentication => settings => Authorized domains => add domain
   //! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
-  const signUpProvider = () => {
+  const signUpWithGoogle = () => {
     //? Google ile giriş yapılması için kullanılan firebase metodu
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -136,7 +143,7 @@ const useAuthCall = () => {
   };
 
 
-  return { registerWithEmail, logOut, userObserver }
+  return { registerWithEmail, logOut, userObserver, signIn, signUpWithGoogle, forgotPassword }
 }
 
 export default useAuthCall

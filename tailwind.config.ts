@@ -24,7 +24,9 @@ const config: Config = {
       black: "#000000",
       btnGreen: "#42b72a",
       red: "#ff0000",
-      linkColor: "#65676b"
+      linkColor: "#65676b",
+      textBlack: "#050505",
+      userLinkHover: "#E3E5E8",
       
     },
   },

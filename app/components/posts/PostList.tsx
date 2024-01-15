@@ -1,27 +1,29 @@
 'use client'
 
-import { selectPost } from "@/lib/redux"
+import { postSlice, selectPost } from "@/lib/redux"
 import usePostsCall from "@/service/usePostsCall"
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import PostCard from "./PostCard"
 
 
 const PostList = () => {
+ const { getPosts } = usePostsCall()
  const posts = useSelector(selectPost);
 
- const { getPosts } = usePostsCall()
+ // const { getPosts } = usePostsCall()
  useEffect(() => {
-  getPosts()
-  console.log(posts);
+  //  getPosts()
+  const data = getPosts()
+  console.log(data);
 
  }, [])
 
 
 
  return (
-  <div className="mt-12 flex flex-wrap justify-center mx-auto gap-8">
-   {posts.data.map((post) => (
+  <div className="w-[500px]">
+   {posts?.data.map((post) => (
     <PostCard post={post} key={post.id} />
    ))}
   </div>
