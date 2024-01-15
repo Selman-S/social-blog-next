@@ -2,13 +2,14 @@
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
 
 import { fetchUser } from './userServices'
+import { fetcherForThunk } from '@/service/fetcherForThunk'
 
 
 
 export const getUserWithThunk = createAppAsyncThunk(
-  'get/getUserWithThunk',
+  'user/getUserWithThunk',
   async () => {
-    const response = await fetchUser()
+    const response = await fetcherForThunk('/user')
     
     
 

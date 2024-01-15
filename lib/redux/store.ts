@@ -5,13 +5,7 @@ import {
   useDispatch as useReduxDispatch,
   type TypedUseSelectorHook,
 } from 'react-redux'
-import { persistReducer ,persistStore} from "redux-persist";
-import storage from "redux-persist/lib/storage/session"
-const authPersistConfig = {
-  key: "auth",
-  storage: storage,
-  whitelist: ["isAuth", "jid"],
-};
+
 /* Instruments */
 import { reducer } from './rootReducer'
 import { middleware } from './middleware'
@@ -22,6 +16,7 @@ export const reduxStore = configureStore({
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(middleware)
   },
+  preloadedState: {},
 })
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>()
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector

@@ -12,7 +12,7 @@ const PostsPage = () => {
     <div>
       <h1>Posts Page</h1>
       <CreatePost />
-      <PostList />
+      {/* <PostList /> */}
     </div>
   )
 }

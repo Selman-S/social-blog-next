@@ -10,8 +10,8 @@ import PostList from "../components/posts/PostList"
 export default async function Home() {
   await reduxStore.dispatch(getPostWithThunk())
   await reduxStore.dispatch(getUserWithThunk())
-  const postState = reduxStore.getState().post
-  const userState = reduxStore.getState().user
+  const postState = reduxStore.getState().post.data
+  const userState = reduxStore.getState().user.data
 
 
 
@@ -20,12 +20,12 @@ export default async function Home() {
     <>
       <div className=" flex flex-wrap gap-5 mx-auto justify-between  ">
 
-        <UserList userState={userState.data} />
+        <UserList users={userState} />
 
 
 
         <div>
-          <PostList />
+          <PostList posts={postState} />
 
           {/* {postState.data.map((post) => (
 
