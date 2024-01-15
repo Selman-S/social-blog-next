@@ -1,4 +1,3 @@
-import { fetcherForThunk } from "@/service/fetcherForThunk";
 import {  Posts} from "@/types/types";
 
 // Get List,
@@ -8,8 +7,21 @@ import {  Posts} from "@/types/types";
 export const fetchPost = async (
   
 ): Promise<{ data : Posts }> => {
- const response = await fetcherForThunk('/post')
- return response;
+
+
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('app-id', process.env.NEXT_PUBLIC_APP_ID || '');
+ 
+  const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/post", {
+   method: "GET",
+   headers: headers,
+  });
+ 
+  const result = await response.json();
+ 
+
+ return result;
 }
 
 
