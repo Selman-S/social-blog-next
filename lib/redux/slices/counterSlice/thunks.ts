@@ -14,7 +14,7 @@ export const incrementAsync = createAppAsyncThunk(
   'counter/fetchIdentityCount',
   async (amount: number) => {
     const response = await fetchIdentityCount(amount)
-console.log('response', response);
+
 
     // The value we return becomes the `fulfilled` action payload
     return response.data

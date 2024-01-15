@@ -19,7 +19,7 @@ const PostDetailPage = ({ params }: { params: { post: string } }) => {
     (async () => {
       const post = await getPostById(params.post)
       setPost(post?.data)
-      console.log(post?.data);
+
 
     })();
 

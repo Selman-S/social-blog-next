@@ -1,4 +1,5 @@
-import UserList from "../components/users/UserList"
+import UserList from "@/app/components/users/UserList"
+
 
 
 const Userspage = () => {

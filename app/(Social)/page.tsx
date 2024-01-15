@@ -10,7 +10,7 @@ export default async function Home() {
   await reduxStore.dispatch(getUserWithThunk())
   const postState = reduxStore.getState().post
   const userState = reduxStore.getState().user
-  console.log(userState);
+
 
 
 

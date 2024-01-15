@@ -75,7 +75,7 @@ const useAuthCall = () => {
     //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+
         const { email, displayName, photoURL, stsTokenManager: { accessToken, refreshToken } } = user;
         const curUser = {
           email,

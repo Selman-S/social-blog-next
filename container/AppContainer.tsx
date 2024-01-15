@@ -13,7 +13,7 @@ function AppContainer({ children }: PropsWithChildren) {
     // const { i18n } = useTranslation();
 
     useEffect(() => {
-        console.log('app')
+   
         dispatch(themeSlice.actions.toggleTheme(localStorage.getItem('theme') || themeConfig.theme));
    
      
