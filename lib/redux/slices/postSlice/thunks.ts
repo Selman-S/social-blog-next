@@ -1,13 +1,14 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
-import { fetchPost } from './postServices'
+import { getPosts } from './postServices/getPosts'
+import { getPost } from './postServices/getPost';
 
 
 
-export const getPostWithThunk = createAppAsyncThunk(
-  'post/getPostWithThunk',
+export const getPostsWithThunk = createAppAsyncThunk(
+  'post/getPostsWithThunk',
   async () => {
-    const response = await fetchPost();
+    const response = await getPosts();
     // console.log('response', response);
     
     return response.data
@@ -15,4 +16,13 @@ export const getPostWithThunk = createAppAsyncThunk(
 )
 
 
+export const getPostWithThunk = createAppAsyncThunk(
+  'post/getPostWithThunk',
+  async (id:string) => {
+    const response = await getPost(id);
+   
+    
+    return response
+  }
+)
 

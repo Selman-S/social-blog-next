@@ -4,11 +4,18 @@
 import { Provider } from 'react-redux'
 
 /* Instruments */
-import { reduxStore } from '@/lib/redux'
+import { makeStore } from '@/lib/redux'
 import { persistStore } from "redux-persist";
 
-persistStore(reduxStore); // persist the store
+interface ReduxProvidersProps {
+  children: React.ReactNode
+  preloadedState: any
+}
 
-export const ReduxProviders = (props: React.PropsWithChildren) => {
-  return <Provider store={reduxStore}>{props.children}</Provider>
+
+export const ReduxProviders = ({ children, preloadedState }: ReduxProvidersProps) => {
+  const store = makeStore(preloadedState);
+  persistStore(store); // persist the store
+  console.log('server store', store.getState())
+  return <Provider store={store}>{children}</Provider>
 }

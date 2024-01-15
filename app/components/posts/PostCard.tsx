@@ -4,6 +4,8 @@ import { Post } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import usePostsCall from '@/service/usePostsCall';
+
+
 export default function PostCard({ post }: { post: Post }) {
 
  const { deletePost } = usePostsCall()
@@ -12,7 +14,7 @@ export default function PostCard({ post }: { post: Post }) {
 
 
  return (
-  <div className=''>
+  <Link href={`/posts/${post.id}`} className=''>
    <Image src={post.owner?.picture} alt={post.owner?.firstName} width={40} height={40} />
    <Image
     src={post.image}
@@ -35,6 +37,6 @@ export default function PostCard({ post }: { post: Post }) {
 
    </div>
 
-  </div >
+  </Link >
  );
 }

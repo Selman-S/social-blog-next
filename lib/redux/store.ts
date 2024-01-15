@@ -11,13 +11,21 @@ import { reducer } from './rootReducer'
 import { middleware } from './middleware'
 // import { middleware } from './middleware'
 
-export const reduxStore = configureStore({
-  reducer,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(middleware)
-  },
-  preloadedState: {},
-})
+
+export function makeStore(preloadedState = {}) {
+  return configureStore({
+    reducer,
+    middleware: (getDefaultMiddleware) => {
+      return getDefaultMiddleware().concat(middleware)
+    },
+    preloadedState,
+  })
+}
+
+
+export const reduxStore = makeStore()
+
+
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>()
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector
 

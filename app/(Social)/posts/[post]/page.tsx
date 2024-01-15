@@ -1,31 +1,25 @@
-"use client"
 
+import { reduxStore } from "@/lib/redux"
+import { getPostWithThunk, getPostsWithThunk } from "@/lib/redux/slices/postSlice/thunks"
 import usePostsCall from "@/service/usePostsCall"
 import { Post } from "@/types/types"
 import { Button, Skeleton } from "@mui/material"
 import { useEffect, useState } from "react"
 
 
+interface PostPageProps {
+  params: {
+    post: string
+  }
+}
+
+const PostDetailPage = async ({ params }: PostPageProps) => {
+
+  await reduxStore.dispatch(getPostWithThunk(params.post))
+  const post = reduxStore.getState().post.postDetail
 
 
-const PostDetailPage = ({ params }: { params: { post: string } }) => {
-
-  const [post, setPost] = useState({} as Post)
-  const { getPostById } = usePostsCall()
-
-
-
-  useEffect(() => {
-    (async () => {
-      const post = await getPostById(params.post)
-      setPost(post?.data)
-
-
-    })();
-
-  }, [])
-
-  if (!post.text) return (
+  if (!post || !post.text) return (
     <Skeleton variant="rectangular" width={210} height={118} />)
   return (
     <div>

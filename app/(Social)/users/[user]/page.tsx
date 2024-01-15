@@ -9,12 +9,12 @@ interface UserDetailPageProps {
 
 const UserDetailPage = async ({ params }: UserDetailPageProps) => {
   await reduxStore.dispatch(getUserWithThunk(params.user))
-  const userState = reduxStore.getState().user.data
-  console.log(userState);
+  const userState = reduxStore.getState().user.userDetail
+
 
   return (
     <div>
-      {userState.firstName}
+      {userState?.firstName} {userState?.lastName}
     </div>
   )
 }

@@ -4,7 +4,7 @@ import {  Posts} from "@/types/types";
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
 
-export const fetchPost = async (
+export const getPosts = async (
   
 ): Promise<{ data : Posts }> => {
 

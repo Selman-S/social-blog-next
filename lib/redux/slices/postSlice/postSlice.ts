@@ -1,7 +1,7 @@
 /* Core */
-import { Posts } from '@/types/types'
+import { Posts,Post, PostFull } from '@/types/types'
 import { createSlice } from '@reduxjs/toolkit'
-import { getPostWithThunk } from './thunks'
+import { getPostWithThunk, getPostsWithThunk } from './thunks'
 
 
 
@@ -15,6 +15,7 @@ const initialState: PostSliceState = {
   data: [],
   loading: false,
   error: null,
+  postDetail: null,
 }
 
 export const postSlice = createSlice({
@@ -39,17 +40,28 @@ export const postSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-     .addCase(getPostWithThunk.pending, (state) => {
+     .addCase(getPostsWithThunk.pending, (state) => {
        state.loading = true
      })
-      .addCase(getPostWithThunk.fulfilled, (state, action) => {
+      .addCase(getPostsWithThunk.fulfilled, (state, action) => {
         state.data = action.payload
         state.loading = false
       })
-      .addCase(getPostWithThunk.rejected, (state, action) => {
+      .addCase(getPostsWithThunk.rejected, (state, action) => {
         state.error = 'Error'
         state.loading = false
       })
+      .addCase(getPostWithThunk.pending, (state) => {
+        state.loading = true
+      })
+       .addCase(getPostWithThunk.fulfilled, (state, action) => {
+         state.postDetail = action.payload
+         state.loading = false
+       })
+       .addCase(getPostWithThunk.rejected, (state, action) => {
+         state.error = 'Error'
+         state.loading = false
+       })
   },
 
 })
@@ -59,4 +71,5 @@ export interface PostSliceState {
   data:Posts
   loading: boolean
   error: null | string
+  postDetail: null | PostFull
 }
