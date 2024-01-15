@@ -2,7 +2,7 @@ import {  Owner} from "@/types/types";
 
 
 
-export const fetchUser = async (): Promise<{ data: Owner[] }> => {
+export const getUsers = async (): Promise<{ data: Owner[] }> => {
  const headers = new Headers();
  headers.append('Content-Type', 'application/json');
  headers.append('app-id', process.env.NEXT_PUBLIC_APP_ID || '');

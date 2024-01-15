@@ -1,20 +1,24 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
 
-import { fetchUser } from './userServices'
+import { getUsers } from './userServices/getUsers'
+import { getUser } from './userServices/getUser'
 
+export const getUsersWithThunk = createAppAsyncThunk(
+  'user/getUsersWithThunk',
+  async () => {
+    const response = await getUsers()
 
-
+    return response.data
+  }
+)
 export const getUserWithThunk = createAppAsyncThunk(
   'user/getUserWithThunk',
-  async () => {
-    const response = await fetchUser()
-    
-    
+  async (id:string) => {
+    const response = await getUser(id)
+console.log('user', response);
 
-    
-    // The value we return becomes the `fulfilled` action payload
-    return response.data
+    return response
   }
 )
 

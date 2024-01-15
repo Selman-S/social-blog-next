@@ -18,7 +18,7 @@ const PostList = ({ posts }: PostListProps) => {
  // useEffect(() => {
  //  getPosts()
  // const data = getPosts()
- console.log(posts);
+
 
  // }, [])
 

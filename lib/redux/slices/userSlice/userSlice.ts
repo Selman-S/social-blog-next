@@ -1,7 +1,7 @@
 /* Core */
-import { CurrentUser, Owner } from '@/types/types'
+import { CurrentUser, Owner, UserFull } from '@/types/types'
 import { createSlice } from '@reduxjs/toolkit'
-import { getUserWithThunk } from './thunks'
+import { getUserWithThunk, getUsersWithThunk } from './thunks'
 
 
 
@@ -13,6 +13,7 @@ import { getUserWithThunk } from './thunks'
 
 const initialState: UserSliceState = {
   data: [],
+  userDetail: null,
   loading: false,
   error: null,
   currentUser: null,
@@ -43,17 +44,28 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-     .addCase(getUserWithThunk.pending, (state) => {
+     .addCase(getUsersWithThunk.pending, (state) => {
        state.loading = true
      })
-      .addCase(getUserWithThunk.fulfilled, (state, action) => {
+      .addCase(getUsersWithThunk.fulfilled, (state, action) => {
         state.data = action.payload
         state.loading = false
       })
-      .addCase(getUserWithThunk.rejected, (state, action) => {
+      .addCase(getUsersWithThunk.rejected, (state, action) => {
         state.error = 'Error'
         state.loading = false
       })
+      .addCase(getUserWithThunk.pending, (state) => {
+        state.loading = true
+      })
+       .addCase(getUserWithThunk.fulfilled, (state, action) => {
+         state.userDetail = action.payload
+         state.loading = false
+       })
+       .addCase(getUserWithThunk.rejected, (state, action) => {
+         state.error = 'Error'
+         state.loading = false
+       })
   },
 
 })
@@ -62,6 +74,7 @@ export const userSlice = createSlice({
 export interface UserSliceState {
   data:Owner[]
   loading: boolean
+  userDetail: null | UserFull
   error: null | string
   currentUser: null  | CurrentUser
 }
