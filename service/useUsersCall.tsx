@@ -6,7 +6,7 @@ import { userSlice } from "@/lib/redux/slices/userSlice"
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
-const usePostsCall = () => {
+const useUsersCall = () => {
  const dispatch = useDispatch()
  const { axiosWithAppId } = useAxios()
 
@@ -55,4 +55,4 @@ const usePostsCall = () => {
 
 }
 
-export default usePostsCall
+export default useUsersCall

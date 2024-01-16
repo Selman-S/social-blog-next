@@ -77,7 +77,8 @@ export default function PostCard({ post }: { post: Post }) {
     <Link href={`/posts/${post.id}`}>
      Düzenle
     </Link>
-    <button onClick={() => handleRemove(post.id)} >
+    {/* <button onClick={() => handleRemove(post.id)} > */}
+    <button  >
      Sil
     </button>
    </CardActions>
