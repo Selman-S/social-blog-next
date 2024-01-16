@@ -35,6 +35,13 @@ export const postSlice = createSlice({
       state.error = action.payload
       state.loading = false
     },
+    setPostDetail: (state, action) => {
+      state.postDetail = action.payload
+      state.loading = false
+    },
+    removePost: (state, action) => {
+      state.data = state.data.filter((post) => post.id !== action.payload)
+    }
   
     
   },

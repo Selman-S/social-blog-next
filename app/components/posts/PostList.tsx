@@ -25,7 +25,7 @@ const PostList = ({ posts }: PostListProps) => {
 
 
  return (
-  <div className="w-[500px]">
+  <div className="w-[500px] mt-4">
    {posts?.map((post) => (
     <PostCard post={post} key={post.id} />
    ))}
