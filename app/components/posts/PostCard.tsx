@@ -37,6 +37,7 @@ export default function PostCard({ post }: { post: Post }) {
  // }
 
 
+
  return (
 
   <Card sx={{ Width: 500 }} className='card'>
