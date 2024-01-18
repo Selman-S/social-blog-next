@@ -9,12 +9,13 @@ import { Post } from "@/types/types"
 
 
 const PostList = () => {
- const { getPosts } = usePostsCall()
+ const { getPosts, getTags } = usePostsCall()
  const posts = useSelector(selectPost);
 
 
  useEffect(() => {
   getPosts()
+  getTags()
   console.log("posts", posts)
  }, [])
 

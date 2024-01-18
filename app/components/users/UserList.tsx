@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux"
 const UserList = () => {
 
 	const { getUsers } = useUsersCall()
-	const { getPostByUserId } = usePostsCall()
+	const { getPostByUserId, getPosts } = usePostsCall()
 	const users = useSelector(selectUser);
 	const dispatch = useDispatch()
 
@@ -30,6 +30,12 @@ const UserList = () => {
 		console.log("click");
 		getPostByUserId(id)
 	}
+
+	const handleAllClick = () => {
+		console.log("click");
+		getPosts()
+	}
+
 
 	if (users.error) {
 		return <div>Error</div>
@@ -46,6 +52,12 @@ const UserList = () => {
 
 	return (
 		<div className=" flex flex-wrap flex-col w-[360px]  p-4 ">
+			<button onClick={() => handleAllClick()} className="flex p-2 items-center cursor-pointer gap-5 text-[15px] leading-5 font-semibold text-textBlack hover:bg-userLinkHover  rounded-lg" >
+				<Image src="/assets/allpostpng.png" alt="allpost icon" width={40} height={40} className="rounded-full" />
+				<div>All Posts</div>
+
+
+			</button>
 			{
 				users.data.map((user) => (
 					<button onClick={() => handleClick(user.id)} className="flex p-2 items-center cursor-pointer gap-5 text-[15px] leading-5 font-semibold text-textBlack hover:bg-userLinkHover  rounded-lg" key={user.id}>

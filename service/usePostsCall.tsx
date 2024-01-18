@@ -33,6 +33,17 @@ const usePostsCall = () => {
    console.log(error);
   }
  }
+ const getTags = async () => {
+
+  try {
+   const response = await axiosWithAppId(`/tag`)
+   console.log(response.data);
+
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+ }
 
  const getPostByUserId = async (id: string) => {
 
@@ -71,7 +82,7 @@ const usePostsCall = () => {
   }
  }
 
- return { getPosts, getPostById, createPost, deletePost, getPostByUserId }
+ return { getPosts, getPostById, createPost, deletePost, getPostByUserId, getTags }
 
 }
 
