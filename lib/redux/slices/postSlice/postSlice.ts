@@ -35,8 +35,8 @@ export const postSlice = createSlice({
     },
     removePost: (state, action) => {
       state.data = state.data.filter((post) => post.id !== action.payload)
-    }
-  
+    },
+    
     
   },
   extraReducers: (builder) => {

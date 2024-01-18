@@ -34,6 +34,19 @@ const usePostsCall = () => {
   }
  }
 
+ const getPostByUserId = async (id: string) => {
+
+  try {
+   const response = await axiosWithAppId(`/user/${id}/post`)
+   console.log(response)
+
+   dispatch(postSlice.actions.setPosts(response.data.data))
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+ }
+
  const createPost = async (post: PostCreate) => {
 
   try {
@@ -58,7 +71,7 @@ const usePostsCall = () => {
   }
  }
 
- return { getPosts, getPostById, createPost, deletePost }
+ return { getPosts, getPostById, createPost, deletePost, getPostByUserId }
 
 }
 

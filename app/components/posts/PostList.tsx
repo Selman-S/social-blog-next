@@ -15,16 +15,28 @@ const PostList = () => {
 
  useEffect(() => {
   getPosts()
-  console.log(posts)
+  console.log("posts", posts)
  }, [])
 
+ if (posts.error) {
+  return <div>Error</div>
+
+ }
+ if (posts.loading) {
+  return <div>Loading...</div>
+
+ }
+ if (posts.data.length === 0) {
+  return <div>No data</div>
+
+ }
 
 
  return (
-  <div className="w-[500px] mt-4">
-   {/* {posts?.map((post) => (
+  <div className="w-[500px] mt-4 flex flex-col gap-4">
+   {posts.data.map((post) => (
     <PostCard post={post} key={post.id} />
-   ))} */}
+   ))}
   </div>
  )
 }
