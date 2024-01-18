@@ -15,7 +15,7 @@ import { IoClose } from "react-icons/io5";
 import { postSlice, reduxStore, selectPost } from '@/lib/redux';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import Divider from '@mui/material/Divider';
 export default function PostCard({ post }: { post: Post }) {
 
 	// const dispatch = useDispatch()
@@ -30,7 +30,7 @@ export default function PostCard({ post }: { post: Post }) {
 
 	return (
 
-		<Card sx={{ Width: 500 }} className='card rounded-xl'>
+		<Card sx={{ Width: 590 }} className='card rounded-xl'>
 			<CardHeader
 				avatar={
 					<Avatar aria-label="recipe">
@@ -60,9 +60,9 @@ export default function PostCard({ post }: { post: Post }) {
 			</CardContent>
 			<Image
 				src={post.image}
-				className="max-h-[400px] object-fit-cover"
-				width={500}
-				height={400}
+				className=""
+				width={590}
+				height={590}
 				alt={post.text}
 			/>
 			<div className="flex p-2 px-4">
@@ -88,25 +88,25 @@ export default function PostCard({ post }: { post: Post }) {
 
 
 				</div>
-				<div className="flex items-center justify-center text-[15px] leading-[21px]  h-5 -ml-2 -mr-2 bg-white text-[#65676b]">
+				<div className="flex items-center justify-center text-[15px] leading-[21px]  h-5 -ml-2 -mr-2 bg-white text-linkColor">
 					<p className="text-xs text-gray-500">{post.likes}</p>
 
 				</div>
 			</div>
 
 
+			<div className="p-2 px-4 ">
+				<div className=" w-full border border-t-0 border-borderGray">
 
 
-			<CardActions disableSpacing>
+				</div>
+			</div>
 
-				<Link href={`/posts/${post.id}`}>
-					Düzenle
-				</Link>
-				{/* <button onClick={() => handleRemove(post.id)} > */}
-				<button  >
-					Sil
-				</button>
-			</CardActions>
+			<div className='p-2 px-4 pb-3 flex justify-around'>
+				<div>like</div>
+				<div>like</div>
+				<div>like</div>
+			</div>
 
 		</Card>
 

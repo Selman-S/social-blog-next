@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import PostCard from "./PostCard"
 import { Post } from "@/types/types"
+import CreatePostHomePage from "./CreatePost"
 
 
 
@@ -34,7 +35,8 @@ const PostList = () => {
 
 
  return (
-  <div className="w-[500px] mt-4 flex flex-col gap-4">
+  <div className="max-w-[590px] mt-4 flex mx-8 flex-col gap-4">
+   <CreatePostHomePage />
    {posts.data.map((post) => (
     <PostCard post={post} key={post.id} />
    ))}

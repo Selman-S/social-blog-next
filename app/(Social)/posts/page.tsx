@@ -1,5 +1,5 @@
 import CreatePost from "@/app/components/posts/CreatePost"
-import PostList from "@/app/components/posts/PostList"
+import PostList from "@/app/components/homepage/PostList"
 
 
 
