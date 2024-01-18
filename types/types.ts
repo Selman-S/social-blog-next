@@ -66,6 +66,13 @@ export interface PostCreate {
   owner: string; // User id
 }
 
+// User Create
+export interface UserCreate {
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
 // Post Preview
 export interface Post {
   id: string;

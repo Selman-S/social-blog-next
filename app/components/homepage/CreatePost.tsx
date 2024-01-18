@@ -1,12 +1,14 @@
 import { Box, Button, Card, Typography } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
-
-const CreatePostHomePage = () => {
+interface CreatePostHomePageProps {
+ handleOpen: () => void;
+}
+const CreatePostHomePage = ({ handleOpen }: CreatePostHomePageProps) => {
 
 
  const handleClick = () => {
-  console.log("click");
+  handleOpen()
  }
  return (
   <Card className='p-2 h-[73px]'>
