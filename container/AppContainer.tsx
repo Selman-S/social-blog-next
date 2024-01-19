@@ -10,15 +10,15 @@ import { useDispatch, useSelector } from 'react-redux';
 function AppContainer({ children }: PropsWithChildren) {
 
     const themeConfig = useSelector(selectThemeConfig)
-    const { userObserver } = useAuthCall();
+    // const { userObserver } = useAuthCall();
 
     // const themeConfig = useSelector((state: IRootState) => state.themeConfig);
     const dispatch = useDispatch();
     // const { i18n } = useTranslation();
 
     useEffect(() => {
-        const user = userObserver()
-        console.log(user.currentUser);
+        // const user = userObserver()
+        // console.log(user.currentUser);
 
         dispatch(themeSlice.actions.toggleTheme(localStorage.getItem('theme') || themeConfig.theme));
 
