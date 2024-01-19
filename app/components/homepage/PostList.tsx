@@ -26,9 +26,11 @@ const PostList = () => {
 
 
  return (
-  <div className="max-w-[590px] mt-4 flex mx-8 flex-col gap-4">
+  <div className="max-w-[680px] mt-4 flex mx-8 flex-col gap-4">
    {/* <CreatePostHomePage handleOpen={handleOpen} /> */}
-   <CreatePostHomePage />
+   <div onClick={handleOpen} >
+    <CreatePostHomePage />
+   </div>
    <CreatePostModal
     open={open}
     handleClose={handleClose}

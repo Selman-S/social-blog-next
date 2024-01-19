@@ -30,7 +30,7 @@ export default function PostCard({ post }: { post: Post }) {
 
 	return (
 
-		<Card sx={{ Width: 590 }} className='card rounded-xl'>
+		<Card className='card rounded-xl max-w-[680px]'>
 			<CardHeader
 				avatar={
 					<Avatar aria-label="recipe">
@@ -61,7 +61,7 @@ export default function PostCard({ post }: { post: Post }) {
 			<Image
 				src={post.image}
 				className=""
-				width={590}
+				width={680}
 				height={590}
 				alt={post.text}
 			/>

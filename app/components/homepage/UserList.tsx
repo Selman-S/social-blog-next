@@ -36,7 +36,7 @@ const UserList = () => {
 
 
 	return (
-		<div className=" flex flex-wrap flex-col w-[280px]  p-4 ">
+		<div className=" hidden flex-wrap flex-col min-w-[260px] max-w-[340px] p-4 lg:flex">
 			<button onClick={() => handleAllClick()} className="flex p-2 items-center cursor-pointer gap-5 text-[15px] leading-5 font-semibold text-textBlack hover:bg-userLinkHover  rounded-lg" >
 				<Image src="/assets/allpostpng.png" alt="allpost icon" width={40} height={40} className="rounded-full" />
 				<div>All Posts</div>
