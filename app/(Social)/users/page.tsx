@@ -10,7 +10,7 @@ const Userspage = async () => {
   return (
     <div>
       <h1>User List</h1>
-      <UserList users={userState} />
+      <UserList />
     </div>
   )
 }
