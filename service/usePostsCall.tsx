@@ -70,7 +70,6 @@ const usePostsCall = () => {
   }
  }
 
-
  const deletePost = async (id: string) => {
 
   try {

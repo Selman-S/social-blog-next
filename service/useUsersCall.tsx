@@ -2,7 +2,6 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
 import { userSlice } from "@/lib/redux/slices/userSlice"
-import { UserCreate } from "@/types/types"
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
@@ -26,7 +25,7 @@ const useUsersCall = () => {
   }
  }
 
- const createUser = async (data: UserCreate) => {
+ const createUser = async (data: any) => {
 
   try {
    const response = await axiosWithAppId.post('/user', data)
