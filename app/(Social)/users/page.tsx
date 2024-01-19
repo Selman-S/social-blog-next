@@ -1,4 +1,4 @@
-import UserList from "@/app/components/users/UserList"
+import UserList from "@/app/components/homepage/UserList"
 import { reduxStore } from "@/lib/redux"
 import { getUsersWithThunk } from "@/lib/redux/slices/userSlice/thunks"
 

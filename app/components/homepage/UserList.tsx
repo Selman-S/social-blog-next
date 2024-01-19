@@ -15,15 +15,13 @@ import { useDispatch, useSelector } from "react-redux"
 
 const UserList = () => {
 
-	const { getUsers } = useUsersCall()
 	const { getPostByUserId, getPosts } = usePostsCall()
 	const users = useSelector(selectUser);
 	const dispatch = useDispatch()
 
 
 	useEffect(() => {
-		getUsers()
-		console.log("users", users)
+
 	}, [])
 
 	const handleClick = (id: string) => {
@@ -36,19 +34,6 @@ const UserList = () => {
 		getPosts()
 	}
 
-
-	if (users.error) {
-		return <div>Error</div>
-
-	}
-	if (users.loading) {
-		return <div>Loading...</div>
-
-	}
-	if (users.data.length === 0) {
-		return <div>No data</div>
-
-	}
 
 	return (
 		<div className=" flex flex-wrap flex-col w-[280px]  p-4 ">

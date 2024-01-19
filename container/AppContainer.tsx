@@ -1,6 +1,5 @@
 'use client'
 import { selectThemeConfig, themeSlice } from '@/lib/redux/slices/themeSlice';
-import useAuthCall from '@/service/useAuthCall';
 import { PropsWithChildren, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,4 +1,4 @@
-import UserList from "../components/users/UserList"
+import UserList from "../components/homepage/UserList"
 import PostList from "../components/homepage/PostList"
 import Sponsored from "../components/homepage/Sponsored"
 
