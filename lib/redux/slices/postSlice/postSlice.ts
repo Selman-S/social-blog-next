@@ -1,7 +1,7 @@
 /* Core */
 import { Posts,Post, PostFull } from '@/types/types'
 import { createSlice } from '@reduxjs/toolkit'
-import {  getPostsWithThunk } from './thunks'
+import {  getPostWithThunk, getPostsWithThunk } from './thunks'
 
 
 
@@ -52,6 +52,17 @@ export const postSlice = createSlice({
         state.error = 'Error'
         state.loading = false
       })
+      .addCase(getPostWithThunk.pending, (state) => {
+        state.loading = true
+      })
+       .addCase(getPostWithThunk.fulfilled, (state, action) => {
+         state.postDetail = action.payload.data
+         state.loading = false
+       })
+       .addCase(getPostWithThunk.rejected, (state, action) => {
+         state.error = 'Error'
+         state.loading = false
+       })
     
   },
 

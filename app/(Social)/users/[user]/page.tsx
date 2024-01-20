@@ -10,6 +10,8 @@ interface UserDetailPageProps {
 const UserDetailPage = async ({ params }: UserDetailPageProps) => {
   await reduxStore.dispatch(getUserWithThunk(params.user))
   const userState = reduxStore.getState().user.userDetail
+  console.log(userState);
+
 
 
   return (
