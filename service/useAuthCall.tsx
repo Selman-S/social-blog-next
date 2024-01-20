@@ -15,6 +15,7 @@ import { auth } from '@/auth/firebase/firebase';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '@/lib/redux/slices/userSlice';
 import { useRouter } from 'next/navigation';
+import { coloredToast } from '@/lib/sweetalertToast/config';
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
@@ -44,23 +45,17 @@ const useAuthCall = () => {
       } else {
         console.error('No user is currently signed in');
       }
-
-      // dispatch(userSlice.actions.setCurrentUser(auth.currentUser))
-      // router.push('/')
-
-
-      // console.log(userCredential);
-      // navigate("/");
-      // toastSuccessNotify("Registered successfully!");
+      coloredToast("success", 'Registered successfull')
     } catch (error) {
       console.log(error);
-      // toastErrorNotify(error.message);
+      coloredToast("error", (error as Error).message);
+
     }
   };
 
   //* https://console.firebase.google.com/
   //* => Authentication => sign-in-method => enable Email/password
-  //! Email/password ile girişi enable yap
+
   const signIn = async (email: string, password: string) => {
     try {
       //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
@@ -69,13 +64,10 @@ const useAuthCall = () => {
         email,
         password
       );
-      // console.log(userCredential);
-      // navigate("/");
-      // toastSuccessNotify("Logged in successfully!");
-      // router.push('/')
+      coloredToast("success", 'Logged in successfull')
+
     } catch (error) {
-      console.log(error);
-      // toastErrorNotify(error.message);
+      coloredToast("error", (error as Error).message);
     }
   };
 
@@ -106,7 +98,7 @@ const useAuthCall = () => {
     console.log('logout');
 
     signOut(auth);
-    // toastSuccessNotify("Logged out successfully");
+    coloredToast("success", 'Logged out successfull')
   };
 
   //* https://console.firebase.google.com/
@@ -119,9 +111,15 @@ const useAuthCall = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        // console.log(result);
-        // navigate("/");
-        // toastSuccessNotify("Logged in successfully");
+        //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+        if (auth.currentUser) {
+          updateProfile(auth.currentUser, {
+            displayName: result.user?.displayName,
+            photoURL: result.user?.photoURL,
+          });
+        } else {
+          console.error('No user is currently signed in');
+        }
       })
       .catch((error) => {
         // Handle Errors here.

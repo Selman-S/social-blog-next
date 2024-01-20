@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
 import { postSlice } from "@/lib/redux"
 import { PostCreate } from "@/types/types"
+import { coloredToast } from "@/lib/sweetalertToast/config"
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
@@ -63,10 +64,11 @@ const usePostsCall = () => {
   try {
    const response = await axiosWithAppId.post(`/post/create`, post)
    console.log(response.data);
-
+   coloredToast("success", 'Post created successfully')
    return response
   } catch (error) {
    console.log(error);
+   coloredToast("error", 'Post could not be created')
   }
  }
 
@@ -75,10 +77,12 @@ const usePostsCall = () => {
   try {
    const response = await axiosWithAppId.delete(`/post/${id}`)
    console.log(response.data);
+   coloredToast("success", 'Post deleted successfully')
 
    return response
   } catch (error) {
    console.log(error);
+   coloredToast("error", 'Post could not be deleted')
   }
  }
 

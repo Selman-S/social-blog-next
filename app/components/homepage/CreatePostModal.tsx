@@ -40,18 +40,13 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 		const res = createPost({ text: data.text || "", tags: data.tags || [], image: data.image || '', likes: 0, owner })
 		console.log(res);
 		handleClose()
-		coloredToast("success", 'başarılı')
+
 	}
 
 	const modalClose = () => {
 		setValue("text", "")
 		setValue("image", "")
 		setValue("tags", [])
-		console.log('modal close');
-		coloredToast("error", 'Kapandı')
-
-
-
 		handleClose()
 	}
 	const all = watch();
