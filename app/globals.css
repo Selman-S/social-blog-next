@@ -111,3 +111,25 @@
 .mui-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+.swal2-popup.swal2-toast.color-success {
+  color: white;
+  background-color: #00ab55;
+}
+.swal2-popup.swal2-toast.color-error {
+  color: white;
+  background-color: #e7515a;
+}
+.swal2-popup.swal2-toast.color-warning {
+  color: white;
+  background-color: #f59e0b;
+}
+.swal2-popup.swal2-toast.color-info {
+  color: white;
+  background-color: #2d7bf4;
+}
+.swal2-popup.swal2-toast .swal2-close {
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}

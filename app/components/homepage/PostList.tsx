@@ -15,12 +15,12 @@ import { Grid } from "@mui/material"
 const PostList = () => {
  const posts = useSelector(selectPost);
  const { currentUser } = useSelector(selectUser);
- const [info, setInfo] = useState<PostCreate>({ text: "", image: "", likes: 0, tags: [], owner: "" })
+
  const [open, setOpen] = useState(false)
  const handleOpen = () => setOpen(true)
+
  const handleClose = () => {
   setOpen(false)
-  setInfo({ text: "", image: "", likes: 0, tags: [], owner: "" })
  }
 
 
@@ -33,8 +33,6 @@ const PostList = () => {
    <CreatePostModal
     open={open}
     handleClose={handleClose}
-    info={info}
-    setInfo={setInfo}
    />
    {posts.error && <ErrorMsg />}
    {posts.data.map((post) => (

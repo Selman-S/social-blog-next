@@ -9,6 +9,8 @@ import { Controller, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { selectUser } from '@/lib/redux/slices/userSlice'
+import { coloredToast } from '@/lib/sweetalertToast/config'
+
 
 
 const postCreateSchema = yup.object({
@@ -20,25 +22,38 @@ const postCreateSchema = yup.object({
 
 type FormData = yup.InferType<typeof postCreateSchema>;
 
-const CreatePostModal = ({ open, handleClose, info, setInfo }: { open: boolean, handleClose: () => void, info: any, setInfo: (info: any) => void }) => {
+const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: () => void }) => {
 
 
 	const { currentUser } = useSelector(selectUser)
 	const { createPost } = usePostsCall()
-	const { register, handleSubmit, watch, control, formState: { errors } } = useForm<FormData>({
+	const { register, handleSubmit, watch, control, formState: { errors }, reset, setValue } = useForm<FormData>({
 		resolver: yupResolver(postCreateSchema)
 	});
 
 	const onSubmit = (data: FormData, event: React.FormEvent) => {
+
+		console.log('sdsa');
 		event.preventDefault();
+
 		const owner = "60d0fe4f5311236168a109ca"
 		const res = createPost({ text: data.text || "", tags: data.tags || [], image: data.image || '', likes: 0, owner })
 		console.log(res);
 		handleClose()
-
-
+		coloredToast("success", 'başarılı')
 	}
 
+	const modalClose = () => {
+		setValue("text", "")
+		setValue("image", "")
+		setValue("tags", [])
+		console.log('modal close');
+		coloredToast("error", 'Kapandı')
+
+
+
+		handleClose()
+	}
 	const all = watch();
 	console.log(all);
 
@@ -58,13 +73,13 @@ const CreatePostModal = ({ open, handleClose, info, setInfo }: { open: boolean, 
 	return (
 		<Modal
 			open={open}
-			onClose={handleClose}
+			onClose={modalClose}
 			aria-labelledby="modal-modal-title"
 			aria-describedby="modal-modal-description"
 
 		>
 			<Box sx={modalStyle} >
-				<div onClick={handleClose} className="absolute w-10 h-10 flex items-center justify-center top-4 right-4 cursor-pointer hover:bg-[#d5d5d5] rounded-full bg-userLinkHover">
+				<div onClick={modalClose} className="absolute w-10 h-10 flex items-center justify-center top-4 right-4 cursor-pointer hover:bg-[#d5d5d5] rounded-full bg-userLinkHover">
 					<Image src="/assets/Vector.png" width="20" height="20" alt="cross icon" />
 				</div>
 				<Typography id="modal-modal-title" className="text-center p-5 mb-4 border-b-[1px] border-b-[#bbb] text-[20px] font-bold" variant="h6" component="h2">
