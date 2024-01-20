@@ -1,6 +1,6 @@
 'use client'
 import { selectPost } from "@/lib/redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import PostCard from "./PostCard"
 import { PostCreate } from "@/types/types"
@@ -9,11 +9,19 @@ import CreatePostModal from "./CreatePostModal"
 import { CardSkeleton, ErrorMsg, NoDataMsg } from "./DataFetchMsg"
 import { selectUser } from "@/lib/redux/slices/userSlice"
 import { Grid } from "@mui/material"
+import usePostsCall from "@/service/usePostsCall"
+
 
 
 
 const PostList = () => {
  const posts = useSelector(selectPost);
+
+ const { getPosts } = usePostsCall()
+
+ useEffect(() => {
+  getPosts()
+ }, [])
 
  return (
   <div className="max-w-[680px] mt-4 mx-2 flex md:mx-8 flex-col gap-4">
