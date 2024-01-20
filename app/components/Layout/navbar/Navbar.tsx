@@ -7,9 +7,11 @@ import { BsFilePostFill } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
+import { IoMdMenu } from "react-icons/io";
+import { redirect } from 'next/navigation'
 import Image from 'next/image';
 import Link from 'next/link'
-import NavbarLinks from "../../login/NavbarLinks";
+import NavbarLinks from "./NavbarLinks";
 import { useEffect, useState } from "react";
 import DefaultProfileIcon from '../icons/DefaulProfileIcon';
 import { useSelector } from 'react-redux';
@@ -58,6 +60,11 @@ function Navbar() {
 	};
 	useEffect(() => {
 		userObserver()
+		if (!currentUser) {
+
+			redirect('/login')
+
+		}
 	}, [])
 
 	return (
@@ -70,10 +77,14 @@ function Navbar() {
 						</Link>
 					</div>
 					<NavbarLinks pages={pages} />
-					<div className="box ">
+					<div className=" flex items-center ">
+						<div className="md:hidden cursor-pointer">
+							<IoMdMenu className="text-2xl" />
+						</div>
 						<div className="profile-tooltip">
 							{currentUser ? <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUserMenu} >
-								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={50} height={50} className="rounded-full" /> :
+								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture'
+									style={{ objectFit: "cover" }} width={50} height={50} sizes="cover" className="rounded-full w-12 h-12" /> :
 									<DefaultProfileIcon />
 
 								)
@@ -82,13 +93,15 @@ function Navbar() {
 							}
 
 						</div>
-						{currentUser && currentUser.displayName &&
+						{currentUser &&
 							<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
-								<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
-									{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={30} height={30} className="rounded-full" /> :
-										<DefaultProfileIcon />
-									}
-									{currentUser.displayName}</Link>
+								{currentUser.firstName &&
+									<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
+										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover", height: "30px" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
+											<DefaultProfileIcon />
+										}
+										{currentUser.firstName}</Link>
+								}
 								{settings.map((setting) => {
 
 									if (setting.name === 'Logout') {

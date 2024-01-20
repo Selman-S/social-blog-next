@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
 import { userSlice } from "@/lib/redux/slices/userSlice"
+import { coloredToast } from "@/lib/sweetalertToast/config"
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
@@ -25,15 +26,16 @@ const useUsersCall = () => {
   }
  }
 
- const createUser = async (data: any) => {
+ const createUserInDummyDb = async (data: any) => {
 
   try {
-   const response = await axiosWithAppId.post('/user', data)
+   const response = await axiosWithAppId.post('/user/create', data)
    console.log(response.data);
 
    return response
   } catch (error) {
    console.log(error);
+   coloredToast("error", (error as Error).message)
   }
  }
 
@@ -51,7 +53,7 @@ const useUsersCall = () => {
   }
  }
 
- return { getUsers, deleteUser }
+ return { getUsers, deleteUser, createUserInDummyDb }
 
 }
 

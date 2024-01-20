@@ -19,20 +19,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // await reduxStore.dispatch(getPostsWithThunk())
-  // await reduxStore.dispatch(getUsersWithThunk())
-  // const postState = reduxStore.getState().post.data
-  // const userState = reduxStore.getState().user.data
+  await reduxStore.dispatch(getPostsWithThunk())
+  await reduxStore.dispatch(getUsersWithThunk())
+  const postState = reduxStore.getState().post.data
+  const userState = reduxStore.getState().user.data
 
   return (
     <ReduxProviders preloadedState={{
       post: {
-        data: []
-        // data: postState 
+
+        data: postState
       },
       user: {
-        data: []
-        // data: userState
+
+        data: userState
       }
     }}>
 

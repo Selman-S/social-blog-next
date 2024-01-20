@@ -1,24 +1,15 @@
 'use client'
-
 import { selectUser } from "@/lib/redux/slices/userSlice"
 import usePostsCall from "@/service/usePostsCall"
 import Image from "next/image"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 
 
 
 const UserList = () => {
-
 	const { getPostByUserId, getPosts } = usePostsCall()
 	const users = useSelector(selectUser);
-	const dispatch = useDispatch()
-
-
-	useEffect(() => {
-
-	}, [])
 
 	const handleClick = (id: string) => {
 		console.log("click");

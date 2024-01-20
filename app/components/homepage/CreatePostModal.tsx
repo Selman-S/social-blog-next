@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '@/lib/redux/slices/userSlice'
 
 
+
 const postCreateSchema = yup.object({
 	text: yup.string().required("Post text is required"),
 	image: yup.string().url("Please enter a valid url"),
@@ -20,51 +21,49 @@ const postCreateSchema = yup.object({
 
 type FormData = yup.InferType<typeof postCreateSchema>;
 
-const CreatePostModal = ({ open, handleClose, info, setInfo }: { open: boolean, handleClose: () => void, info: any, setInfo: (info: any) => void }) => {
+const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: () => void }) => {
 
 
 	const { currentUser } = useSelector(selectUser)
 	const { createPost } = usePostsCall()
-	const { register, handleSubmit, watch, control, formState: { errors } } = useForm<FormData>({
+	const { register, handleSubmit, watch, control, formState: { errors }, reset, setValue } = useForm<FormData>({
 		resolver: yupResolver(postCreateSchema)
 	});
 
 	const onSubmit = (data: FormData, event: React.FormEvent) => {
+
+		console.log('sdsa');
 		event.preventDefault();
-		const owner = "60d0fe4f5311236168a109ca"
+
+		const owner = currentUser?.uid || "60d0fe4f5311236168a109ca"
 		const res = createPost({ text: data.text || "", tags: data.tags || [], image: data.image || '', likes: 0, owner })
 		console.log(res);
-		handleClose()
-
+		modalClose()
 
 	}
 
+	const modalClose = () => {
+		setValue("text", "")
+		setValue("image", "")
+		setValue("tags", [])
+		handleClose()
+	}
 	const all = watch();
 	console.log(all);
 
-	const modalStyle = {
-		position: "absolute",
-		top: "50%",
-		left: "50%",
-		transform: "translate(-50%, -50%)",
-		width: 500,
-		bgcolor: "background.paper",
-		border: "2px solid #000",
-		boxShadow: 24,
-		borderRadius: 2,
 
-
-	}
 	return (
 		<Modal
 			open={open}
-			onClose={handleClose}
+			onClose={modalClose}
 			aria-labelledby="modal-modal-title"
 			aria-describedby="modal-modal-description"
 
+
+
 		>
-			<Box sx={modalStyle} >
-				<div onClick={handleClose} className="absolute w-10 h-10 flex items-center justify-center top-4 right-4 cursor-pointer hover:bg-[#d5d5d5] rounded-full bg-userLinkHover">
+			<Box className=' absolute -translate-x-2/4 -translate-y-2/4 w-[90%]  md:w-[500px] bg-[#fff] shadow-[0px_0px_24px_rgba(0,0,0,0.2)] rounded-lg left-2/4 top-2/4' >
+				<div onClick={modalClose} className="absolute w-10 h-10 flex items-center justify-center top-4 right-4 cursor-pointer hover:bg-[#d5d5d5] rounded-full bg-userLinkHover">
 					<Image src="/assets/Vector.png" width="20" height="20" alt="cross icon" />
 				</div>
 				<Typography id="modal-modal-title" className="text-center p-5 mb-4 border-b-[1px] border-b-[#bbb] text-[20px] font-bold" variant="h6" component="h2">

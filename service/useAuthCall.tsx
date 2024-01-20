@@ -15,10 +15,12 @@ import { auth } from '@/auth/firebase/firebase';
 import { useDispatch } from 'react-redux';
 import { userSlice } from '@/lib/redux/slices/userSlice';
 import { useRouter } from 'next/navigation';
+import { coloredToast } from '@/lib/sweetalertToast/config';
+import useUsersCall from './useUsersCall';
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
-
+  const { createUserInDummyDb } = useUsersCall()
   const router = useRouter();
 
 
@@ -28,39 +30,44 @@ const useAuthCall = () => {
     userObserver();
   }, []);
 
-  const registerWithEmail = async (email: string, password: string, displayName: string) => {
+
+
+  const registerWithEmail = async (email: string, password: string, image: string, firstName: string, lastName: string) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const regi = await createUserInDummyDb({ firstName, lastName, email })
+      console.log(regi);
+      if (regi && regi.status === 200 && regi.data.id) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      } else {
+        coloredToast("error", 'Something went wrong')
+      }
       //? kullanıcı profilini güncellemek için kullanılan firebase metodu
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
-          displayName: displayName,
+          displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
+          photoURL: image,
         });
+        coloredToast("success", 'Registered successfull')
       } else {
         console.error('No user is currently signed in');
       }
 
-      // dispatch(userSlice.actions.setCurrentUser(auth.currentUser))
-      // router.push('/')
 
-
-      // console.log(userCredential);
-      // navigate("/");
-      // toastSuccessNotify("Registered successfully!");
     } catch (error) {
       console.log(error);
-      // toastErrorNotify(error.message);
+      coloredToast("error", (error as Error).message);
+
     }
   };
 
   //* https://console.firebase.google.com/
   //* => Authentication => sign-in-method => enable Email/password
-  //! Email/password ile girişi enable yap
+
   const signIn = async (email: string, password: string) => {
     try {
       //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
@@ -69,35 +76,39 @@ const useAuthCall = () => {
         email,
         password
       );
-      // console.log(userCredential);
-      // navigate("/");
-      // toastSuccessNotify("Logged in successfully!");
-      // router.push('/')
+      coloredToast("success", 'Logged in successfull')
+
     } catch (error) {
-      console.log(error);
-      // toastErrorNotify(error.message);
+      coloredToast("error", (error as Error).message);
     }
   };
 
   const userObserver = () => {
     //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
     onAuthStateChanged(auth, (user) => {
+
       if (user) {
         console.log(user);
 
         const { email, displayName, photoURL } = user;
+        const firstName = displayName?.split('&')[0]
+        const lastName = displayName?.split('&')[1].split('#')[0]
+        const uid = displayName?.split('#')[1]
         const curUser = {
           email,
-          displayName,
+          firstName: firstName,
+          lastName: lastName,
           photoURL,
+          uid
+
         }
+        console.log('curUser', curUser);
+
         dispatch(userSlice.actions.setCurrentUser(curUser))
         router.push('/')
       } else {
-        // User is signed out
-        // setCurrentUser(false);
         dispatch(userSlice.actions.setCurrentUser(null))
-        // sessionStorage.removeItem("user");
+        router.push('/login')
       }
     });
   };
@@ -106,7 +117,7 @@ const useAuthCall = () => {
     console.log('logout');
 
     signOut(auth);
-    // toastSuccessNotify("Logged out successfully");
+    coloredToast("success", 'Logged out successfull')
   };
 
   //* https://console.firebase.google.com/
@@ -119,9 +130,15 @@ const useAuthCall = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        // console.log(result);
-        // navigate("/");
-        // toastSuccessNotify("Logged in successfully");
+        //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+        if (auth.currentUser) {
+          updateProfile(auth.currentUser, {
+            displayName: result.user?.displayName,
+            photoURL: result.user?.photoURL,
+          });
+        } else {
+          console.error('No user is currently signed in');
+        }
       })
       .catch((error) => {
         // Handle Errors here.

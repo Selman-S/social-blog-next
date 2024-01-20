@@ -38,6 +38,7 @@ const LoginCover = () => {
         <div className='mt-5'>
 
          <SignUpButton />
+
         </div>
        </div>
       </div>
