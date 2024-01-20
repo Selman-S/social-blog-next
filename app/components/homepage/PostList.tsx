@@ -28,17 +28,13 @@ const PostList = () => {
 
    <CreatePostHomePage />
    {posts.error && <ErrorMsg />}
-   {posts.data.map((post) => (
-    <PostCard post={post} key={post.id} />
-   ))}
-
    {posts.loading && (
     <CardSkeleton />
    )}
    {!posts.loading && !posts?.data.length && <NoDataMsg />}
 
    {!posts.loading && posts?.data?.length > 0 && (
-    <Grid container justifyContent={"center"} gap={2} mt={4}>
+    <Grid container justifyContent={"center"} gap={2}>
      {posts?.data?.map((post) => (
       <PostCard post={post} key={post.id} />
 

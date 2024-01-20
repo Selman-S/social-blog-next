@@ -11,14 +11,10 @@ const CreatePostHomePage = () => {
   setOpen(false)
  }
 
-
- const handleClick = () => {
-  console.log("click");
- }
  return (
   <>
-   <Card onClick={handleOpen} className='p-2 h-[73px]'>
-    <div onClick={handleClick} className='rounded-md p-2 w-full cursor-pointer  hover:bg-[#f2f2f2] transition-all flex items-center h-full'>
+   <Card onClick={handleOpen} className='p-2 h-[73px] rounded-lg'>
+    <div className='rounded-ld p-2 w-full cursor-pointer  hover:bg-[#f2f2f2] transition-all flex items-center h-full'>
      <div className='flex justify-center items-center w-10 h-10 me-2 bg-[#EBF5FF] rounded-full'>
       <Image src='/assets/create.png' alt='plus icon' width={14} height={14} />
      </div>

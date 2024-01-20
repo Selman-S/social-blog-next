@@ -9,6 +9,7 @@ import { useSelector } from "react-redux"
 
 const UserList = () => {
 	const { getPostByUserId, getPosts } = usePostsCall()
+
 	const users = useSelector(selectUser);
 
 	const handleClick = (id: string) => {
@@ -18,7 +19,7 @@ const UserList = () => {
 
 	const handleAllClick = () => {
 		console.log("click");
-		getPosts()
+		// getPosts()
 	}
 
 

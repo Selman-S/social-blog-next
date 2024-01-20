@@ -35,7 +35,8 @@ const useAuthCall = () => {
   const registerWithEmail = async (email: string, password: string, image: string, firstName: string, lastName: string) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
-      const regi = await createUserInDummyDb({ firstName, lastName, email })
+
+      const regi = await createUserInDummyDb({ firstName, lastName, email, image })
       console.log(regi);
       if (regi && regi.status === 200 && regi.data.id) {
         const userCredential = await createUserWithEmailAndPassword(
@@ -91,9 +92,15 @@ const useAuthCall = () => {
         console.log(user);
 
         const { email, displayName, photoURL } = user;
-        const firstName = displayName?.split('&')[0]
-        const lastName = displayName?.split('&')[1].split('#')[0]
-        const uid = displayName?.split('#')[1]
+        let firstName = ''
+        let lastName = ''
+        let uid = ''
+        if (displayName?.includes('&')) {
+          firstName = displayName?.split('&')[0]
+          lastName = displayName?.split('&')[1].split('#')[0]
+          uid = displayName?.split('#')[1]
+
+        }
         const curUser = {
           email,
           firstName: firstName,
@@ -131,7 +138,23 @@ const useAuthCall = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+
         if (auth.currentUser) {
+          const { email, displayName, photoURL } = auth.currentUser;
+          const data = {
+            firstName: displayName,
+            lastName: displayName,
+            email,
+            image: photoURL
+          }
+          const regi = createUserInDummyDb({
+            firstName: data.firstName || '',
+            lastName: data.lastName || '',
+            email: data.email || '',
+            image: data.image || ''
+          });
+          console.log("regi", regi);
+
           updateProfile(auth.currentUser, {
             displayName: result.user?.displayName,
             photoURL: result.user?.photoURL,

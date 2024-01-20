@@ -26,13 +26,26 @@ const useUsersCall = () => {
   }
  }
 
- const createUserInDummyDb = async (data: any) => {
-
+ const createUserInDummyDb = async ({ firstName, lastName, email, image }: { firstName: string, lastName: string, email: string, image: string }) => {
+  const data = {
+   firstName,
+   lastName,
+   email,
+  }
   try {
    const response = await axiosWithAppId.post('/user/create', data)
-   console.log(response.data);
+   if (response.data.status === 200) {
+    try {
 
-   return response
+     const res = await axiosWithAppId.put(`/user/${response.data.id}`, { picture: image })
+    } catch (error) {
+     coloredToast("error", (error as Error).message)
+    }
+
+    return response
+
+   }
+
   } catch (error) {
    console.log(error);
    coloredToast("error", (error as Error).message)

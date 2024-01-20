@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import { convertDateFormat } from '@/utils/convertDate';
 import { IoClose } from "react-icons/io5";
 import usePostsCall from '@/service/usePostsCall';
+import { Box, Popover, Tooltip } from '@mui/material';
+import Link from 'next/link';
 
 
 export default function PostCard({ post }: { post: Post }) {
@@ -21,25 +23,79 @@ export default function PostCard({ post }: { post: Post }) {
 		console.log(id);
 		deletePost(id)
 	}
+	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
+	const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handlePopoverClose = () => {
+		setAnchorEl(null);
+	};
+
+	const open = Boolean(anchorEl);
 	return (
 
 		<Card className='card rounded-xl max-w-[680px]'>
 			<CardHeader
 				avatar={
-					<Avatar aria-label="recipe">
+					<Avatar aria-label="recipe" className='cursor-pointer' aria-owns={open ? 'mouse-over-popover' : undefined}
+						aria-haspopup="true"
+						onMouseEnter={handlePopoverOpen}
+						onMouseLeave={handlePopoverClose}>
 						<Image src={post.owner?.picture} className="rounded" alt={post.owner?.firstName} width={40} height={40} />
 					</Avatar>
 				}
 				action={
-					<IconButton aria-label="settings">
-						<IoClose className="w-6 h-6" onClick={() => handleRemove(post.id)} />
-						{/* <IoClose className="w-6 h-6" /> */}
-					</IconButton>
+					<Tooltip title="Hidden Post" placement="top" >
+						<IconButton aria-label="settings">
+							<IoClose className="w-6 h-6" onClick={() => handleRemove(post.id)} />
+							{/* <IoClose className="w-6 h-6" /> */}
+						</IconButton>
+					</Tooltip>
 				}
 				title={post.owner?.firstName + " " + post.owner?.lastName}
 				subheader={convertDateFormat(post.publishDate)}
 			/>
+			<Popover
+				id="mouse-over-popover"
+				sx={{
+					pointerEvents: 'none',
+				}}
+				open={open}
+				anchorEl={anchorEl}
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left',
+				}}
+				transformOrigin={{
+					vertical: 'top',
+					horizontal: 'left',
+				}}
+				onClose={handlePopoverClose}
+				disableRestoreFocus
+			>
+				<Card className="rounded-lg p-4">
+
+
+					<Box>
+						<Image src={post.owner?.picture} className="rounded-full object-cover object-center" alt={post.owner?.firstName} width={120} height={120} />
+					</Box>
+					<Box>
+						<Typography className="text-xl font-semibold">
+
+							{post.owner?.title}
+						</Typography>
+						<Typography className="text-xl font-semibold">
+
+							{post.owner?.firstName} {post.owner?.lastName}
+						</Typography>
+
+					</Box>
+
+
+				</Card>
+			</Popover>
 			<div className='flex gap-2 px-4'>
 				{post.tags?.map((tag, index) => (
 

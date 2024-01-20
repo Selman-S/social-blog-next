@@ -48,9 +48,6 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 		setValue("tags", [])
 		handleClose()
 	}
-	const all = watch();
-	console.log(all);
-
 
 	return (
 		<Modal

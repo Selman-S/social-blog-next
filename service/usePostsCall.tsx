@@ -16,7 +16,7 @@ const usePostsCall = () => {
  const getPosts = async () => {
 
   try {
-   const response = await axiosWithAppId('/post')
+   const response = await axiosWithAppId('/post?limit=50')
    console.log(response.data);
    dispatch(postSlice.actions.setPosts(response.data.data))
 
@@ -66,6 +66,7 @@ const usePostsCall = () => {
    const response = await axiosWithAppId.post(`/post/create`, post)
    console.log(response.data);
    coloredToast("success", 'Post created successfully')
+   getPosts()
    return response
   } catch (error) {
    console.log(error);

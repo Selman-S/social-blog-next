@@ -26,6 +26,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'scontent.fesb4-2.fna.fbcdn.net',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 }
