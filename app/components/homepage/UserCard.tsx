@@ -20,8 +20,6 @@ export default function UserCard({ user }: { user: Owner }) {
  const { deleteUser } = useUsersCall()
 
 
-
-
  return (
   <Card sx={{ maxWidth: 345 }}>
    <CardHeader

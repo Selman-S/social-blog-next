@@ -109,8 +109,8 @@ export type Tag = string[];
 
 export interface CurrentUser {
   email: string;
-  displayName: string;
+  firstName: string;
+  lastName: string;
   photoURL: string;
-  accessToken: string;
-  refreshToken: string;
+  uid: string;
 }

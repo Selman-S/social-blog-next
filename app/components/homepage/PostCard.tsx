@@ -14,16 +14,6 @@ import { IoClose } from "react-icons/io5";
 
 export default function PostCard({ post }: { post: Post }) {
 
-	// const dispatch = useDispatch()
-
-	// const posts = useSelector(selectPost);
-	// console.log(posts);
-
-	// const handleRemove = (id: string) => {
-	//  dispatch(postSlice.actions.removePost(id))
-	// }
-
-
 	return (
 
 		<Card className='card rounded-xl max-w-[680px]'>

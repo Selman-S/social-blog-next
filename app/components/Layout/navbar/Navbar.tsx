@@ -8,7 +8,7 @@ import { IoIosSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
 import { IoMdMenu } from "react-icons/io";
-
+import { redirect } from 'next/navigation'
 import Image from 'next/image';
 import Link from 'next/link'
 import NavbarLinks from "./NavbarLinks";
@@ -60,6 +60,11 @@ function Navbar() {
 	};
 	useEffect(() => {
 		userObserver()
+		if (!currentUser) {
+
+
+
+		}
 	}, [])
 
 	return (
@@ -78,7 +83,8 @@ function Navbar() {
 						</div>
 						<div className="profile-tooltip">
 							{currentUser ? <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUserMenu} >
-								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={50} height={50} className="rounded-full" /> :
+								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture'
+									style={{ objectFit: "cover" }} width={50} height={50} sizes="cover" className="rounded-full w-12 h-12" /> :
 									<DefaultProfileIcon />
 
 								)
@@ -91,10 +97,10 @@ function Navbar() {
 							<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
 								{currentUser.displayName &&
 									<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
-										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={30} height={30} className="rounded-full" /> :
+										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
 											<DefaultProfileIcon />
 										}
-										{currentUser.displayName}</Link>
+										{currentUser.displayName.split('&')[0]}</Link>
 								}
 								{settings.map((setting) => {
 

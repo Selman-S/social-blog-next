@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux"
 import useAxios from "./useAxios"
 import { userSlice } from "@/lib/redux/slices/userSlice"
+import { coloredToast } from "@/lib/sweetalertToast/config"
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
@@ -34,6 +35,7 @@ const useUsersCall = () => {
    return response
   } catch (error) {
    console.log(error);
+   coloredToast("error", (error as Error).message)
   }
  }
 

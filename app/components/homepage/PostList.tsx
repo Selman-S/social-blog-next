@@ -14,40 +14,19 @@ import { Grid } from "@mui/material"
 
 const PostList = () => {
  const posts = useSelector(selectPost);
- const { currentUser } = useSelector(selectUser);
-
- const [open, setOpen] = useState(false)
- const handleOpen = () => setOpen(true)
-
- const handleClose = () => {
-  setOpen(false)
- }
-
 
  return (
   <div className="max-w-[680px] mt-4 mx-2 flex md:mx-8 flex-col gap-4">
-   {/* <CreatePostHomePage handleOpen={handleOpen} /> */}
-   <div onClick={handleOpen} >
-    <CreatePostHomePage />
-   </div>
-   <CreatePostModal
-    open={open}
-    handleClose={handleClose}
-   />
+
+   <CreatePostHomePage />
    {posts.error && <ErrorMsg />}
    {posts.data.map((post) => (
     <PostCard post={post} key={post.id} />
    ))}
 
-
-
-
    {posts.loading && (
     <CardSkeleton />
-
-
    )}
-
    {!posts.loading && !posts?.data.length && <NoDataMsg />}
 
    {!posts.loading && posts?.data?.length > 0 && (

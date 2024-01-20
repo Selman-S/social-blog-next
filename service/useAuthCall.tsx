@@ -32,29 +32,32 @@ const useAuthCall = () => {
 
 
 
-  const registerWithEmail = async (email: string, password: string, firstName: string, lastName: string) => {
+  const registerWithEmail = async (email: string, password: string, image: string, firstName: string, lastName: string) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
       const regi = await createUserInDummyDb({ firstName, lastName, email })
       console.log(regi);
       if (regi && regi.status === 200 && regi.data.id) {
-        coloredToast("success", 'Registered successfull')
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
+      } else {
+        coloredToast("error", 'Something went wrong')
       }
       //? kullanıcı profilini güncellemek için kullanılan firebase metodu
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
           displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
+          photoURL: image,
         });
+        coloredToast("success", 'Registered successfull')
       } else {
         console.error('No user is currently signed in');
       }
 
-      coloredToast("success", 'Registered successfull')
+
     } catch (error) {
       console.log(error);
       coloredToast("error", (error as Error).message);
@@ -87,18 +90,24 @@ const useAuthCall = () => {
         console.log(user);
 
         const { email, displayName, photoURL } = user;
+        const firstName = displayName?.split('&')[0]
+        const lastName = displayName?.split('&')[1].split('#')[0]
+        const uid = displayName?.split('#')[1]
         const curUser = {
           email,
-          displayName,
+          firstName: firstName,
+          lastName: lastName,
           photoURL,
+          uid
+
         }
+        console.log('curUser', curUser);
+
         dispatch(userSlice.actions.setCurrentUser(curUser))
         router.push('/')
       } else {
-        // User is signed out
-        // setCurrentUser(false);
         dispatch(userSlice.actions.setCurrentUser(null))
-        // sessionStorage.removeItem("user");
+        router.push('/login')
       }
     });
   };
