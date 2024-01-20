@@ -10,9 +10,17 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { convertDateFormat } from '@/utils/convertDate';
 import { IoClose } from "react-icons/io5";
+import usePostsCall from '@/service/usePostsCall';
 
 
 export default function PostCard({ post }: { post: Post }) {
+
+	const { deletePost } = usePostsCall()
+
+	const handleRemove = (id: string) => {
+		console.log(id);
+		deletePost(id)
+	}
 
 	return (
 
@@ -25,8 +33,8 @@ export default function PostCard({ post }: { post: Post }) {
 				}
 				action={
 					<IconButton aria-label="settings">
-						{/* <IoClose className="w-6 h-6" onClick={() => handleRemove(post.id)} /> */}
-						<IoClose className="w-6 h-6" />
+						<IoClose className="w-6 h-6" onClick={() => handleRemove(post.id)} />
+						{/* <IoClose className="w-6 h-6" /> */}
 					</IconButton>
 				}
 				title={post.owner?.firstName + " " + post.owner?.lastName}

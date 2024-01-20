@@ -4,6 +4,7 @@ import useAxios from "./useAxios"
 import { postSlice } from "@/lib/redux"
 import { PostCreate } from "@/types/types"
 import { coloredToast } from "@/lib/sweetalertToast/config"
+import { get } from "http"
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
@@ -78,6 +79,7 @@ const usePostsCall = () => {
    const response = await axiosWithAppId.delete(`/post/${id}`)
    console.log(response.data);
    coloredToast("success", 'Post deleted successfully')
+   getPosts()
 
    return response
   } catch (error) {

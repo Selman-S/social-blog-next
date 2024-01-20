@@ -35,7 +35,7 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 		console.log('sdsa');
 		event.preventDefault();
 
-		const owner = "60d0fe4f5311236168a109ca"
+		const owner = currentUser?.uid || "60d0fe4f5311236168a109ca"
 		const res = createPost({ text: data.text || "", tags: data.tags || [], image: data.image || '', likes: 0, owner })
 		console.log(res);
 		modalClose()
@@ -60,8 +60,9 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 			aria-describedby="modal-modal-description"
 
 
+
 		>
-			<Box className=' absolute -translate-x-2/4 -translate-y-2/4 w-[500px] bg-[#fff] shadow-[0px_0px_24px_rgba(0,0,0,0.2)] rounded-lg left-2/4 top-2/4' >
+			<Box className=' absolute -translate-x-2/4 -translate-y-2/4 w-[90%]  md:w-[500px] bg-[#fff] shadow-[0px_0px_24px_rgba(0,0,0,0.2)] rounded-lg left-2/4 top-2/4' >
 				<div onClick={modalClose} className="absolute w-10 h-10 flex items-center justify-center top-4 right-4 cursor-pointer hover:bg-[#d5d5d5] rounded-full bg-userLinkHover">
 					<Image src="/assets/Vector.png" width="20" height="20" alt="cross icon" />
 				</div>

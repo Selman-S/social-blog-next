@@ -62,7 +62,7 @@ function Navbar() {
 		userObserver()
 		if (!currentUser) {
 
-
+			redirect('/login')
 
 		}
 	}, [])
@@ -95,12 +95,12 @@ function Navbar() {
 						</div>
 						{currentUser &&
 							<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
-								{currentUser.displayName &&
+								{currentUser.firstName &&
 									<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
-										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
+										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover", height: "30px" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
 											<DefaultProfileIcon />
 										}
-										{currentUser.displayName.split('&')[0]}</Link>
+										{currentUser.firstName}</Link>
 								}
 								{settings.map((setting) => {
 
