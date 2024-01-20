@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ReduxProviders } from '@/lib/providers';
-import DefaultLayout from './components/Layout/DefaultLayout';
 import { getPostsWithThunk } from '@/lib/redux/slices/postSlice/thunks';
 import { getUsersWithThunk } from '@/lib/redux/slices/userSlice/thunks';
 import { reduxStore } from '@/lib/redux';
@@ -20,20 +19,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  await reduxStore.dispatch(getPostsWithThunk())
-  await reduxStore.dispatch(getUsersWithThunk())
-  const postState = reduxStore.getState().post.data
-  const userState = reduxStore.getState().user.data
-
-
+  // await reduxStore.dispatch(getPostsWithThunk())
+  // await reduxStore.dispatch(getUsersWithThunk())
+  // const postState = reduxStore.getState().post.data
+  // const userState = reduxStore.getState().user.data
 
   return (
     <ReduxProviders preloadedState={{
       post: {
-        data: postState
+        data: []
+        // data: postState 
       },
       user: {
-        data: userState
+        data: []
+        // data: userState
       }
     }}>
 

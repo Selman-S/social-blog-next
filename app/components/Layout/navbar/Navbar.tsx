@@ -1,6 +1,5 @@
 'use client'
 
-import { IoSearch } from "react-icons/io5";
 import { GoHomeFill } from "react-icons/go";
 import { TbUsers } from "react-icons/tb";
 import { MdOndemandVideo } from "react-icons/md";
@@ -8,12 +7,9 @@ import { BsFilePostFill } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
-
-import { IoMenu } from "react-icons/io5";
 import Image from 'next/image';
 import Link from 'next/link'
 import NavbarLinks from "../../login/NavbarLinks";
-import path from "path";
 import { useEffect, useState } from "react";
 import DefaultProfileIcon from '../icons/DefaulProfileIcon';
 import { useSelector } from 'react-redux';

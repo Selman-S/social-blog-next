@@ -85,13 +85,11 @@ const useAuthCall = () => {
       if (user) {
         console.log(user);
 
-        const { email, displayName, photoURL, stsTokenManager: { accessToken, refreshToken } } = user;
+        const { email, displayName, photoURL } = user;
         const curUser = {
           email,
           displayName,
           photoURL,
-          accessToken,
-          refreshToken
         }
         dispatch(userSlice.actions.setCurrentUser(curUser))
         router.push('/')

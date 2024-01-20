@@ -9,8 +9,6 @@ const LoginCover = () => {
 
  return (
   <div className="min-h-screen text-black dark:text-white-dark bg-loginbg">
-
-
    <div className="flex min-h-screen max-w-[980px] mx-auto ">
     <div className="hidden min-h-screen w-1/2 flex-col  items-center justify-center p-4 text-white dark:text-black lg:flex ">
      <div className="mx-auto mb-5 w-full text-main text-5xl font-bold">
@@ -24,8 +22,6 @@ const LoginCover = () => {
 
       <div className="max-w-[480px] p-5">
        <LoginForm />
-
-
        <ul className="my-5  flex justify-center gap-2 sm:gap-5">
         <li className='w-full '>
          <GoogleButton />

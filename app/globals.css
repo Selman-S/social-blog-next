@@ -103,3 +103,11 @@
   letter-spacing: 0.0075em;
   margin: 0;
 }
+
+.Mui-selected {
+  background-color: #1877f2;
+  color: #fff;
+}
+.mui-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+}
