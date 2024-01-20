@@ -28,6 +28,7 @@ const config: Config = {
       textBlack: "#050505",
       userLinkHover: "#E3E5E8",
       activeLink: "#0866ff",
+      linkGreen: "#00a400",
     },
   },
   plugins: [],

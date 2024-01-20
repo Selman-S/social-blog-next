@@ -87,13 +87,15 @@ function Navbar() {
 							}
 
 						</div>
-						{currentUser && currentUser.displayName &&
+						{currentUser &&
 							<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
-								<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
-									{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={30} height={30} className="rounded-full" /> :
-										<DefaultProfileIcon />
-									}
-									{currentUser.displayName}</Link>
+								{currentUser.displayName &&
+									<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
+										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={30} height={30} className="rounded-full" /> :
+											<DefaultProfileIcon />
+										}
+										{currentUser.displayName}</Link>
+								}
 								{settings.map((setting) => {
 
 									if (setting.name === 'Logout') {

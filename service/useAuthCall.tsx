@@ -16,10 +16,11 @@ import { useDispatch } from 'react-redux';
 import { userSlice } from '@/lib/redux/slices/userSlice';
 import { useRouter } from 'next/navigation';
 import { coloredToast } from '@/lib/sweetalertToast/config';
+import useUsersCall from './useUsersCall';
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
-
+  const { createUserInDummyDb } = useUsersCall()
   const router = useRouter();
 
 
@@ -29,22 +30,30 @@ const useAuthCall = () => {
     userObserver();
   }, []);
 
-  const registerWithEmail = async (email: string, password: string, displayName: string) => {
+
+
+  const registerWithEmail = async (email: string, password: string, firstName: string, lastName: string) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const regi = await createUserInDummyDb({ firstName, lastName, email })
+      console.log(regi);
+      if (regi && regi.status === 200 && regi.data.id) {
+        coloredToast("success", 'Registered successfull')
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      }
       //? kullanıcı profilini güncellemek için kullanılan firebase metodu
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
-          displayName: displayName,
+          displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
         });
       } else {
         console.error('No user is currently signed in');
       }
+
       coloredToast("success", 'Registered successfull')
     } catch (error) {
       console.log(error);

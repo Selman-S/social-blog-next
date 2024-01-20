@@ -9,7 +9,6 @@ import { Controller, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { selectUser } from '@/lib/redux/slices/userSlice'
-import { coloredToast } from '@/lib/sweetalertToast/config'
 
 
 
@@ -39,7 +38,7 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 		const owner = "60d0fe4f5311236168a109ca"
 		const res = createPost({ text: data.text || "", tags: data.tags || [], image: data.image || '', likes: 0, owner })
 		console.log(res);
-		handleClose()
+		modalClose()
 
 	}
 
@@ -52,19 +51,7 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 	const all = watch();
 	console.log(all);
 
-	const modalStyle = {
-		position: "absolute",
-		top: "50%",
-		left: "50%",
-		transform: "translate(-50%, -50%)",
-		width: 500,
-		bgcolor: "background.paper",
-		border: "2px solid #000",
-		boxShadow: 24,
-		borderRadius: 2,
 
-
-	}
 	return (
 		<Modal
 			open={open}
@@ -72,8 +59,9 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 			aria-labelledby="modal-modal-title"
 			aria-describedby="modal-modal-description"
 
+
 		>
-			<Box sx={modalStyle} >
+			<Box className=' absolute -translate-x-2/4 -translate-y-2/4 w-[500px] bg-[#fff] shadow-[0px_0px_24px_rgba(0,0,0,0.2)] rounded-lg left-2/4 top-2/4' >
 				<div onClick={modalClose} className="absolute w-10 h-10 flex items-center justify-center top-4 right-4 cursor-pointer hover:bg-[#d5d5d5] rounded-full bg-userLinkHover">
 					<Image src="/assets/Vector.png" width="20" height="20" alt="cross icon" />
 				</div>

@@ -25,10 +25,10 @@ const useUsersCall = () => {
   }
  }
 
- const createUser = async (data: any) => {
+ const createUserInDummyDb = async (data: any) => {
 
   try {
-   const response = await axiosWithAppId.post('/user', data)
+   const response = await axiosWithAppId.post('/user/create', data)
    console.log(response.data);
 
    return response
@@ -51,7 +51,7 @@ const useUsersCall = () => {
   }
  }
 
- return { getUsers, deleteUser }
+ return { getUsers, deleteUser, createUserInDummyDb }
 
 }
 
