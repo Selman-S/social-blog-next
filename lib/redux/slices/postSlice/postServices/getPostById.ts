@@ -1,10 +1,10 @@
-import {  Post, PostFull, Posts} from "@/types/types";
+import {  Post, PostFull} from "@/types/types";
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
 
-export const getPost = async (id:string): Promise<{ data : PostFull }> => {
+export const getPostById = async (id:string): Promise<{ data : PostFull }> => {
 
 
   const headers = new Headers();

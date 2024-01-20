@@ -1,12 +1,8 @@
 'use client'
 
-import { postSlice } from "@/lib/redux"
 import { selectUser } from "@/lib/redux/slices/userSlice"
 import usePostsCall from "@/service/usePostsCall"
-import useUsersCall from "@/service/useUsersCall"
-import { Owner } from "@/types/types"
 import Image from "next/image"
-import Link from "next/link"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 

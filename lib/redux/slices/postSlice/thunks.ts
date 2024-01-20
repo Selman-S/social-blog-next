@@ -1,7 +1,7 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
 import { getPosts } from './postServices/getPosts'
-import { getPost } from './postServices/getPost';
+import { getPostById } from './postServices/getPostById';
 
 
 
@@ -16,10 +16,10 @@ export const getPostsWithThunk = createAppAsyncThunk(
 )
 
 
-export const getPostWithThunk = createAppAsyncThunk(
+export const getPostByIdWithThunk = createAppAsyncThunk(
   'post/getPostWithThunk',
   async (id:string) => {
-    const response = await getPost(id);
+    const response = await getPostById(id);
    
     
     return response

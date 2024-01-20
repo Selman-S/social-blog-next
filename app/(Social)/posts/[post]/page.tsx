@@ -1,10 +1,7 @@
 
 import { reduxStore } from "@/lib/redux"
-import { getPostWithThunk, getPostsWithThunk } from "@/lib/redux/slices/postSlice/thunks"
-import usePostsCall from "@/service/usePostsCall"
-import { Post } from "@/types/types"
-import { Button, Skeleton } from "@mui/material"
-import { useEffect, useState } from "react"
+import { getPostByIdWithThunk, getPostsWithThunk } from "@/lib/redux/slices/postSlice/thunks"
+import { Skeleton } from "@mui/material"
 
 
 interface PostPageProps {
@@ -15,7 +12,7 @@ interface PostPageProps {
 
 const PostDetailPage = async ({ params }: PostPageProps) => {
 
-  await reduxStore.dispatch(getPostWithThunk(params.post))
+  await reduxStore.dispatch(getPostByIdWithThunk(params.post))
   const post = reduxStore.getState().post.postDetail
 
 

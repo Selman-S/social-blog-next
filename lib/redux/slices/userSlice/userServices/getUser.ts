@@ -1,6 +1,4 @@
 import {   UserFull} from "@/types/types";
-import { log } from "console";
-
 
 
 export const getUser = async (id:string): Promise<{ data: UserFull }> => {

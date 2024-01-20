@@ -1,5 +1,5 @@
 import usePostsCall from '@/service/usePostsCall'
-import { Box, Button, Divider, FormControl, InputLabel, MenuItem, Modal, OutlinedInput, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, FormControl, InputLabel, MenuItem, Modal, OutlinedInput, Select, Typography } from '@mui/material'
 import React from 'react'
 import { tags } from './tags'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup";
 import { Controller, useForm } from 'react-hook-form'
 import Image from 'next/image'
-import { CurrentUser } from '@/types/types';
 import { useSelector } from 'react-redux'
 import { selectUser } from '@/lib/redux/slices/userSlice'
 

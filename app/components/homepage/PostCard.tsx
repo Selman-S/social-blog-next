@@ -2,20 +2,16 @@
 import * as React from 'react';
 import { Post } from '@/types/types';
 import Image from 'next/image';
-import Link from 'next/link';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { convertDateFormat } from '@/utils/convertDate';
 import { IoClose } from "react-icons/io5";
-import { postSlice, reduxStore, selectPost } from '@/lib/redux';
-import { useDispatch, useSelector } from 'react-redux';
 
-import Divider from '@mui/material/Divider';
+
 export default function PostCard({ post }: { post: Post }) {
 
 	// const dispatch = useDispatch()

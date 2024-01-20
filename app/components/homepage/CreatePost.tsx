@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography } from '@mui/material'
+import { Box, Card, Typography } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
 

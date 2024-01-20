@@ -1,4 +1,4 @@
-import {  Post, Posts} from "@/types/types";
+import {   Posts} from "@/types/types";
 
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
