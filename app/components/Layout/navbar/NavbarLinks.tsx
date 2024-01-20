@@ -16,7 +16,7 @@ const NavbarLinks = ({ pages }: NavbarLinksProps) => {
   console.log(pathname);
 
   return (
-    <div className="box gap-1">
+    <div className="gap-1 hidden md:flex items-center">
       {pages?.map((page) => (
         <Link href={page.path} key={page.name} className={pathname == page.path ? "active w-24" : "w-24"} >
           <button className="nav-links relative flex items-center justify-center w-24 h-20">

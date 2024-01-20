@@ -7,9 +7,11 @@ import { BsFilePostFill } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
+import { IoMdMenu } from "react-icons/io";
+
 import Image from 'next/image';
 import Link from 'next/link'
-import NavbarLinks from "../../login/NavbarLinks";
+import NavbarLinks from "./NavbarLinks";
 import { useEffect, useState } from "react";
 import DefaultProfileIcon from '../icons/DefaulProfileIcon';
 import { useSelector } from 'react-redux';
@@ -70,7 +72,10 @@ function Navbar() {
 						</Link>
 					</div>
 					<NavbarLinks pages={pages} />
-					<div className="box ">
+					<div className=" flex items-center ">
+						<div className="md:hidden cursor-pointer">
+							<IoMdMenu className="text-2xl" />
+						</div>
 						<div className="profile-tooltip">
 							{currentUser ? <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUserMenu} >
 								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture' width={50} height={50} className="rounded-full" /> :

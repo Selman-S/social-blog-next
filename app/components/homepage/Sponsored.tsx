@@ -5,7 +5,7 @@ import React from 'react'
 
 const Sponsored = () => {
 	return (
-		<div className="min-w-[260px] max-w-[340px] text-linkColor text-[17px] mt-[28px] pe-e font-semibold">
+		<div className="hidden md:block min-w-[260px] max-w-[340px] text-linkColor text-[17px] mt-[28px]  font-semibold">
 			<Typography variant="h6" className="mb-4">
 				Sponsored
 			</Typography>
