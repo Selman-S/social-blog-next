@@ -31,6 +31,10 @@ export const userSlice = createSlice({
       state.data = action.payload
       state.loading = false
     },
+    setUserDetail: (state, action) => {
+      state.userDetail = action.payload
+      state.loading = false
+    },
 
     fetchError: (state, action) => {
       state.error = action.payload

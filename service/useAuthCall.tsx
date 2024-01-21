@@ -20,7 +20,7 @@ import useUsersCall from './useUsersCall';
 
 const useAuthCall = () => {
   const dispatch = useDispatch();
-  const { createUserInDummyDb } = useUsersCall()
+  const { createUserInDummyDb, getUserById } = useUsersCall()
   const router = useRouter();
 
 
@@ -32,13 +32,13 @@ const useAuthCall = () => {
 
 
 
-  const registerWithEmail = async (email: string, password: string, picture: string, firstName: string, lastName: string) => {
-    console.log(email, password, picture, firstName, lastName);
+  const registerWithEmail = async (email: string, password: string, firstName: string, lastName: string) => {
+
 
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
 
-      const regi = await createUserInDummyDb({ firstName, lastName, email, picture })
+      const regi = await createUserInDummyDb({ firstName, lastName, email })
       console.log(regi);
       if (regi && regi.status === 200 && regi.data.id) {
         const userCredential = await createUserWithEmailAndPassword(
@@ -50,7 +50,6 @@ const useAuthCall = () => {
         if (auth.currentUser) {
           await updateProfile(auth.currentUser, {
             displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
-            photoURL: picture,
           });
           coloredToast("success", 'Registered successfull')
         } else {
@@ -124,7 +123,8 @@ const useAuthCall = () => {
           uid
 
         }
-        console.log('curUser', curUser);
+
+        console.log("observer updated displaya name", curUser);
 
         dispatch(userSlice.actions.setCurrentUser(curUser))
         router.push('/')
@@ -147,27 +147,54 @@ const useAuthCall = () => {
   //! Google ile girişi enable yap
   //* => Authentication => settings => Authorized domains => add domain
   //! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
-  const signUpWithGoogle = () => {
+
+
+  const signUpWithGoogle = async () => {
     //? Google ile giriş yapılması için kullanılan firebase metodu
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+    try {
+      const signGoogle = await signInWithPopup(auth, provider)
+      console.log("signGoogle", signGoogle);
+      if (auth.currentUser && auth.currentUser.displayName?.includes('#')) {
+        const uid = auth.currentUser.displayName?.split('#')[1]
+        const loginDummy = await getUserById(uid)
+        console.log("loginDummy", loginDummy);
+      } else {
+        const createDummyLogin = await createUserInDummyDb({ firstName: signGoogle.user?.displayName || '', lastName: signGoogle.user?.displayName || '', email: signGoogle.user?.email || '' })
+        console.log("createDummyLogin", createDummyLogin);
 
         if (auth.currentUser) {
           updateProfile(auth.currentUser, {
-            displayName: result.user?.displayName,
-            photoURL: result.user?.photoURL,
+            displayName: signGoogle.user?.displayName + '&' + signGoogle.user?.displayName + '#' + (createDummyLogin?.data?.id ?? ''),
           });
-        } else {
-          console.error('No user is currently signed in');
         }
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.log(error);
-      });
+
+      }
+
+      //   //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+    } catch (error) {
+
+    }
+    // .then((result) => {
+    //   console.log("google", result);
+    //   console.log("google", auth.currentUser);
+
+
+    //   if (auth.currentUser) {
+    //     updateProfile(auth.currentUser, {
+    //       displayName: result.user?.displayName,
+    //       photoURL: result.user?.photoURL,
+    //     });
+    //   } else {
+    //     console.error('No user is currently signed in');
+    //   }
+    // })
+    // .catch((error) => {
+    //   // Handle Errors here.
+    //   console.log(error);
+    // });
   };
+
 
   const forgotPassword = (email: string) => {
     sendPasswordResetEmail(auth, email)

@@ -45,7 +45,7 @@ const settings = [
 function Navbar() {
 	const { currentUser } = useSelector(selectUser)
 	const [anchorElUser, setAnchorElUser] = useState<null | Boolean>(null);
-	const { logOut, userObserver } = useAuthCall();
+	const { logOut } = useAuthCall();
 
 	const handleOpenUserMenu = () => {
 		setAnchorElUser((e) => !Boolean(e));

@@ -13,10 +13,11 @@ import useAuthCall from '@/service/useAuthCall'
 const userCreateSchema = yup.object({
  firstName: yup.string().required("Firstname is required"),
  lastName: yup.string().required("Lastname is required"),
- picture: yup.string().url("Please enter a valid url"),
  email: yup.string().email("Please enter a valid email").required("Email is required"),
- password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-
+ password: yup.string()
+  .required("Password is required.")
+  .min(6, "Password must be at least 6 characters long")
+  .max(16, "Password must not exceed 16 characters")
 });
 
 type FormData = yup.InferType<typeof userCreateSchema>;
@@ -40,7 +41,6 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
   registerWithEmail(
    data.email || '',
    data.password || '',
-   data.picture || '',
    data.firstName || '',
    data.lastName || ''
   )
@@ -53,14 +53,12 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
 
   setValue("firstName", "")
   setValue("lastName", "")
-  setValue("picture", "")
   setValue("email", "")
   setValue("password", "")
   handleClose()
   console.log(errors);
   clearErrors("email")
   clearErrors("password")
-  clearErrors("picture")
   clearErrors("firstName")
   clearErrors("lastName")
 
@@ -112,14 +110,7 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
       {...register("lastName")}
 
      />
-     <input
-      className={`p-3 text-xl border rounded-lg  border-borderGray w-full ${errors.lastName && 'border-red'}`}
-      required
-      id="picture"
-      placeholder="İmage url from unsplush.com"
-      {...register("picture")}
 
-     />
      {errors.lastName && <span className='text-red'>{errors.lastName.message}</span>}
      <input
       className={`p-3 text-xl border rounded-lg  border-borderGray w-full ${errors.email && 'border-red'}`}

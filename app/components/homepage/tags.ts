@@ -80,6 +80,39 @@ export const tags = [
      "name": "jewelry"
  },
  {
+    "_id": "36",
+    "name": "istanbul"
+},
+{
+    "_id": "37",
+    "name": "castle"
+},
+{
+    "_id": "38",
+    "name": "mosque"
+},
+{
+    "_id": "39",
+    "name": "church"
+},
+{
+    "_id": "40",
+    "name": "bus"
+},
+{
+    "_id": "41",
+    "name": "train"
+},
+{
+    "_id": "42",
+    "name": "BMW"
+},
+{
+    "_id": "43",
+    "name": "autmn"
+},
+
+ {
      "_id": "9",
      "name": "lake"
  },

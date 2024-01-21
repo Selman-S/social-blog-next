@@ -11,11 +11,8 @@ const loginSchema = yup.object({
   .required("Email is required"),
  password: yup.string()
   .required("Password is required.")
-  .min(8, "Password must be at least 8 characters long")
+  .min(6, "Password must be at least 6 characters long")
   .max(16, "Password must not exceed 16 characters")
-  .matches(/\d+/, "Password must contain at least one digit")
-  .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-  .matches(/[A-Z]/, "Password must contain at least one uppercase letter"),
  // displayname: yup.string().required("Name is required.").min(3, "Name must be at least 3 characters long"),
 });
 

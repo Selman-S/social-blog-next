@@ -1,9 +1,10 @@
 "use client"
 import useAuthCall from '@/service/useAuthCall';
-import React from 'react'
+import React, { use, useEffect } from 'react'
 
 const GoogleButton = () => {
-  const { registerWithEmail, signIn, signUpWithGoogle } = useAuthCall();
+  const { signUpWithGoogle, userObserver } = useAuthCall();
+
   return (
     <button
       type="button"

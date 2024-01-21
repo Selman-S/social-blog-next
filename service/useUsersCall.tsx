@@ -26,7 +26,22 @@ const useUsersCall = () => {
   }
  }
 
- const createUserInDummyDb = async ({ firstName, lastName, email, picture }: { firstName: string, lastName: string, email: string, picture: string }) => {
+ const getUserById = async (id: string) => {
+  dispatch(userSlice.actions.fetchStart())
+
+  try {
+   const response = await axiosWithAppId(`/user/${id}`)
+   console.log(response.data);
+   dispatch(userSlice.actions.setUserDetail(response.data.data))
+
+   return response
+  } catch (error) {
+   console.log(error);
+   dispatch(userSlice.actions.fetchError(error))
+  }
+ }
+
+ const createUserInDummyDb = async ({ firstName, lastName, email }: { firstName: string, lastName: string, email: string }) => {
   const data = {
    firstName,
    lastName,
@@ -35,21 +50,9 @@ const useUsersCall = () => {
 
   try {
    const response = await axiosWithAppId.post('/user/create', data)
-   console.log(response.data);
+   console.log("dummy user create", response.data);
 
-   if (response.data.id) {
-    try {
-
-     const res = await axiosWithAppId.put(`/user/${response.data.id}`, { picture: picture })
-     console.log(res.data);
-
-    } catch (error) {
-     coloredToast("error", (error as Error).message)
-    }
-
-    return response
-
-   }
+   return response
 
   } catch (error) {
    console.log(error);
@@ -71,7 +74,7 @@ const useUsersCall = () => {
   }
  }
 
- return { getUsers, deleteUser, createUserInDummyDb }
+ return { getUsers, deleteUser, createUserInDummyDb, getUserById }
 
 }
 

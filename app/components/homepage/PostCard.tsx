@@ -49,8 +49,8 @@ export default function PostCard({ post }: { post: Post }) {
 					}
 					action={
 						<Tooltip title="Hidden Post" placement="top" >
-							<IconButton aria-label="settings">
-								<IoClose className="w-6 h-6" onClick={() => handleRemove(post.id)} />
+							<IconButton aria-label="settings" onClick={() => handleRemove(post.id)} >
+								<IoClose className="w-6 h-6" />
 								{/* <IoClose className="w-6 h-6" /> */}
 							</IconButton>
 						</Tooltip>
