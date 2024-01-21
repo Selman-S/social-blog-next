@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className=" flex flex-nowrap gap-5 mx-auto justify-between max-w-[1960px] ">
+      <div className=" flex flex-nowrap gap-2 mx-auto justify-between max-w-[1960px] ">
         <UserList />
         <PostList />
         <Sponsored />

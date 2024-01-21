@@ -59,13 +59,13 @@ function Navbar() {
 		setAnchorElUser(null);
 	};
 	useEffect(() => {
-		userObserver()
+
 		if (!currentUser) {
 
 			redirect('/login')
 
 		}
-	}, [])
+	}, [currentUser])
 
 	return (
 		<nav className="navbar appbar bg-white px-6">
@@ -82,14 +82,14 @@ function Navbar() {
 							<IoMdMenu className="text-2xl" />
 						</div>
 						<div className="profile-tooltip">
-							{currentUser ? <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUserMenu} >
+							{currentUser && <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUserMenu} >
 								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture'
 									style={{ objectFit: "cover" }} width={50} height={50} sizes="cover" className="rounded-full w-12 h-12" /> :
 									<DefaultProfileIcon />
 
 								)
 								}
-							</div> : (<Link href="/login" className=" p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer text-[17px] font-bold " >Login</Link>)
+							</div>
 							}
 
 						</div>

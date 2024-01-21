@@ -9,6 +9,7 @@ export const getUser = async (id:string): Promise<{ data: UserFull }> => {
  const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/user/${id}`, {
   method: "GET",
   headers: headers,
+  cache: "no-store",
  });
 
  const responseData = await response.json(); // Extract JSON data from the response

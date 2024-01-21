@@ -9,6 +9,8 @@ import { Controller, useForm } from 'react-hook-form'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { selectUser } from '@/lib/redux/slices/userSlice'
+import { redirect } from 'next/navigation'
+import { coloredToast } from '@/lib/sweetalertToast/config'
 
 
 
@@ -34,7 +36,10 @@ const CreatePostModal = ({ open, handleClose }: { open: boolean, handleClose: ()
 
 		console.log('sdsa');
 		event.preventDefault();
-
+		if (!currentUser?.uid) {
+			coloredToast('error', 'Please login to create post')
+			redirect('/login')
+		}
 		const owner = currentUser?.uid || "60d0fe4f5311236168a109ca"
 		const res = createPost({ text: data.text || "", tags: data.tags || [], image: data.image || '', likes: 0, owner })
 		console.log(res);

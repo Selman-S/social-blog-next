@@ -17,11 +17,11 @@ import usePostsCall from "@/service/usePostsCall"
 const PostList = () => {
  const posts = useSelector(selectPost);
 
- const { getPosts } = usePostsCall()
+ // const { getPosts } = usePostsCall()
 
- useEffect(() => {
-  getPosts()
- }, [])
+ // useEffect(() => {
+ //  getPosts()
+ // }, [])
 
  return (
   <div className="max-w-[680px] mt-4 mx-2 flex md:mx-8 flex-col gap-4">

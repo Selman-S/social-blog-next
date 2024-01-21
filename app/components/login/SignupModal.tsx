@@ -13,7 +13,7 @@ import useAuthCall from '@/service/useAuthCall'
 const userCreateSchema = yup.object({
  firstName: yup.string().required("Firstname is required"),
  lastName: yup.string().required("Lastname is required"),
- image: yup.string().url("Please enter a valid url"),
+ picture: yup.string().url("Please enter a valid url"),
  email: yup.string().email("Please enter a valid email").required("Email is required"),
  password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 
@@ -40,7 +40,7 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
   registerWithEmail(
    data.email || '',
    data.password || '',
-   data.image || '',
+   data.picture || '',
    data.firstName || '',
    data.lastName || ''
   )
@@ -53,14 +53,14 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
 
   setValue("firstName", "")
   setValue("lastName", "")
-  setValue("image", "")
+  setValue("picture", "")
   setValue("email", "")
   setValue("password", "")
   handleClose()
   console.log(errors);
   clearErrors("email")
   clearErrors("password")
-  clearErrors("image")
+  clearErrors("picture")
   clearErrors("firstName")
   clearErrors("lastName")
 
@@ -115,9 +115,9 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
      <input
       className={`p-3 text-xl border rounded-lg  border-borderGray w-full ${errors.lastName && 'border-red'}`}
       required
-      id="image"
+      id="picture"
       placeholder="İmage url from unsplush.com"
-      {...register("image")}
+      {...register("picture")}
 
      />
      {errors.lastName && <span className='text-red'>{errors.lastName.message}</span>}

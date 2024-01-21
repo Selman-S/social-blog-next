@@ -16,6 +16,7 @@ export const getPosts = async (
   const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/post", {
    method: "GET",
    headers: headers,
+   cache: "no-store",
   });
  
   const result = await response.json();

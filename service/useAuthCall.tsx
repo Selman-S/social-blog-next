@@ -32,11 +32,11 @@ const useAuthCall = () => {
 
 
 
-  const registerWithEmail = async (email: string, password: string, image: string, firstName: string, lastName: string) => {
+  const registerWithEmail = async (email: string, password: string, picture: string, firstName: string, lastName: string) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
 
-      const regi = await createUserInDummyDb({ firstName, lastName, email, image })
+      const regi = await createUserInDummyDb({ firstName, lastName, email, picture })
       console.log(regi);
       if (regi && regi.status === 200 && regi.data.id) {
         const userCredential = await createUserWithEmailAndPassword(
@@ -51,7 +51,7 @@ const useAuthCall = () => {
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
           displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
-          photoURL: image,
+          photoURL: picture,
         });
         coloredToast("success", 'Registered successfull')
       } else {
@@ -94,7 +94,7 @@ const useAuthCall = () => {
         const { email, displayName, photoURL } = user;
         let firstName = ''
         let lastName = ''
-        let uid = ''
+        let uid = '60d0fe4f5311236168a109ca'
         if (displayName?.includes('&')) {
           firstName = displayName?.split('&')[0]
           lastName = displayName?.split('&')[1].split('#')[0]
@@ -140,21 +140,6 @@ const useAuthCall = () => {
         //? kullanıcı profilini güncellemek için kullanılan firebase metodu
 
         if (auth.currentUser) {
-          const { email, displayName, photoURL } = auth.currentUser;
-          const data = {
-            firstName: displayName,
-            lastName: displayName,
-            email,
-            image: photoURL
-          }
-          const regi = createUserInDummyDb({
-            firstName: data.firstName || '',
-            lastName: data.lastName || '',
-            email: data.email || '',
-            image: data.image || ''
-          });
-          console.log("regi", regi);
-
           updateProfile(auth.currentUser, {
             displayName: result.user?.displayName,
             photoURL: result.user?.photoURL,

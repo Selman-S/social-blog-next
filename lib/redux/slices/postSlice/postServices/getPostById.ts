@@ -14,6 +14,7 @@ export const getPostById = async (id:string): Promise<{ data : PostFull }> => {
   const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/post/${id}`, {
    method: "GET",
    headers: headers,
+   cache: "no-store",
   });
  
   const result = await response.json();
