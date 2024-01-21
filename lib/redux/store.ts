@@ -14,9 +14,9 @@ import { middleware } from './middleware'
 export function makeStore(preloadedState = {}) {
   return configureStore({
     reducer,
-    middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(middleware)
-    },
+    // middleware: (getDefaultMiddleware) => {
+    //   return getDefaultMiddleware().concat(middleware)
+    // },
     preloadedState,
   })
 }
