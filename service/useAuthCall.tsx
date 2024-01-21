@@ -33,6 +33,8 @@ const useAuthCall = () => {
 
 
   const registerWithEmail = async (email: string, password: string, picture: string, firstName: string, lastName: string) => {
+    console.log(email, password, picture, firstName, lastName);
+
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
 
@@ -44,19 +46,32 @@ const useAuthCall = () => {
           email,
           password
         );
+
+        if (auth.currentUser) {
+          await updateProfile(auth.currentUser, {
+            displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
+            photoURL: picture,
+          });
+          coloredToast("success", 'Registered successfull')
+        } else {
+          console.error('No user is currently signed in');
+        }
       } else {
         coloredToast("error", 'Something went wrong')
       }
+
+      console.log(auth.currentUser);
+
       //? kullanıcı profilini güncellemek için kullanılan firebase metodu
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
-          photoURL: picture,
-        });
-        coloredToast("success", 'Registered successfull')
-      } else {
-        console.error('No user is currently signed in');
-      }
+      // if (auth.currentUser) {
+      //   await updateProfile(auth.currentUser, {
+      //     displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
+      //     photoURL: picture,
+      //   });
+      //   coloredToast("success", 'Registered successfull')
+      // } else {
+      //   console.error('No user is currently signed in');
+      // }
 
 
     } catch (error) {

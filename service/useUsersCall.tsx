@@ -32,12 +32,17 @@ const useUsersCall = () => {
    lastName,
    email,
   }
+
   try {
    const response = await axiosWithAppId.post('/user/create', data)
-   if (response.data.status === 200) {
+   console.log(response.data);
+
+   if (response.data.id) {
     try {
 
      const res = await axiosWithAppId.put(`/user/${response.data.id}`, { picture: picture })
+     console.log(res.data);
+
     } catch (error) {
      coloredToast("error", (error as Error).message)
     }

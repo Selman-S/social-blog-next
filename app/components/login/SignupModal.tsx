@@ -34,7 +34,7 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
 
  const onSubmit = (data: FormData, event: React.FormEvent) => {
 
-  console.log('sdsa');
+  console.log(data);
   event.preventDefault();
 
   registerWithEmail(
@@ -66,8 +66,8 @@ const SignupModal = ({ open, handleClose }: { open: boolean, handleClose: () => 
 
 
  }
- const all = watch();
- console.log(all);
+ // const all = watch();
+ // console.log(all);
 
  return (
   <Modal

@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import useAuthCall from '@/service/useAuthCall';
-import { useSelector } from 'react-redux';
-import { selectUser } from '@/lib/redux/slices/userSlice';
 
 const loginSchema = yup.object({
  email: yup.string()
@@ -29,15 +27,14 @@ type FormData = yup.InferType<typeof loginSchema>;
 
 const LoginForm = () => {
 
- const user = useSelector(selectUser)
- const { userObserver } = useAuthCall();
+
  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
   resolver: yupResolver(loginSchema)
  });
 
- user
 
- const { registerWithEmail, signIn, signUpWithGoogle } = useAuthCall();
+
+ const { signIn } = useAuthCall();
 
  const onSubmit = (data: FormData, event: React.FormEvent) => {
   event.preventDefault();
@@ -46,10 +43,8 @@ const LoginForm = () => {
  }
 
 
- const all = watch();
- console.log(all);
-
- console.log(user);
+ // const all = watch();
+ // console.log(all);
 
 
 
@@ -68,14 +63,6 @@ const LoginForm = () => {
 
     autoFocus />
 
-   {/* <input
-    className='p-2 border rounded-lg  border-borderGray w-full'
-    required
-    id="displayname"
-    placeholder="Name"
-    {...register("displayname")}
-
-   /> */}
 
    <input
     required
