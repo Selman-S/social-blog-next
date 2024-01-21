@@ -1,4 +1,5 @@
-import UserList from "@/app/components/homepage/UserList"
+import UserLeftSide from "@/app/components/users/UserLeftSide"
+import UsersCards from "@/app/components/users/UsersCards"
 import { reduxStore } from "@/lib/redux"
 import { getUsersWithThunk } from "@/lib/redux/slices/userSlice/thunks"
 
@@ -8,9 +9,11 @@ const Userspage = async () => {
   await reduxStore.dispatch(getUsersWithThunk())
   const userState = reduxStore.getState().user.data
   return (
-    <div>
-      <h1>User List</h1>
-      <UserList />
+    <div className="flex">
+      <UserLeftSide />
+      <UsersCards users={userState} />
+
+
     </div>
   )
 }

@@ -133,3 +133,9 @@
   cursor: pointer;
   transition: opacity 0.3s;
 }
+
+.MuiPaper-root.MuiPaper-elevation.MuiDrawer-paper.MuiDrawer-paperAnchorTop {
+  width: 100%;
+
+ 
+}

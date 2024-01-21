@@ -7,7 +7,6 @@ import { BsFilePostFill } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
-import { IoMdMenu } from "react-icons/io";
 import { redirect } from 'next/navigation'
 import Image from 'next/image';
 import Link from 'next/link'
@@ -17,6 +16,13 @@ import DefaultProfileIcon from '../icons/DefaulProfileIcon';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/lib/redux/slices/userSlice';
 import useAuthCall from '@/service/useAuthCall';
+
+
+import SwipeableTemporaryDrawer from "./SwipeableTemporaryDrawer"
+
+
+
+
 const pages = [
 	{ name: 'Home', path: '/', icon: <GoHomeFill /> },
 	{ name: 'Users', path: '/users', icon: <TbUsers /> },
@@ -47,25 +53,20 @@ function Navbar() {
 	const [anchorElUser, setAnchorElUser] = useState<null | Boolean>(null);
 	const { logOut } = useAuthCall();
 
-	const handleOpenUserMenu = () => {
+	const handleOpenUser = () => {
 		setAnchorElUser((e) => !Boolean(e));
-
-
 	};
 
-
-	const handleCloseUserMenu = () => {
-
+	const handleCloseUser = () => {
 		setAnchorElUser(null);
 	};
+
 	useEffect(() => {
-
 		if (!currentUser) {
-
 			redirect('/login')
-
 		}
 	}, [currentUser])
+
 
 	return (
 		<nav className="navbar appbar bg-white px-6">
@@ -77,56 +78,58 @@ function Navbar() {
 						</Link>
 					</div>
 					<NavbarLinks pages={pages} />
-					<div className=" flex items-center ">
-						<div className="md:hidden cursor-pointer">
-							<IoMdMenu className="text-2xl" />
-						</div>
-						<div className="profile-tooltip">
-							{currentUser && <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUserMenu} >
-								{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture'
-									style={{ objectFit: "cover" }} width={50} height={50} sizes="cover" className="rounded-full w-12 h-12" /> :
-									<DefaultProfileIcon />
+					<div className="flex gap-4 items-center">
 
-								)
+						<SwipeableTemporaryDrawer />
+						<div className=" flex items-center ">
+
+							<div className="profile-tooltip">
+								{currentUser && <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUser} >
+									{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture'
+										style={{ objectFit: "cover" }} width={50} height={50} sizes="cover" className="rounded-full w-12 h-12" /> :
+										<DefaultProfileIcon />
+
+									)
+									}
+								</div>
 								}
+
 							</div>
-							}
+							{currentUser &&
+								<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
+									{currentUser.firstName &&
+										<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
+											{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover", height: "30px" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
+												<DefaultProfileIcon />
+											}
+											{currentUser.firstName}</Link>
+									}
+									{settings.map((setting) => {
 
-						</div>
-						{currentUser &&
-							<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
-								{currentUser.firstName &&
-									<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
-										{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover", height: "30px" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
-											<DefaultProfileIcon />
+										if (setting.name === 'Logout') {
+
+											return (
+												<div className="profile-menu-item mt-2 block p-4 hover:bg-loginbg  rounded-md cursor-pointer"
+													onClick={() => { handleCloseUser(); logOut() }}
+													key={setting.name}
+												>
+													<div className="flex gap-2"	>{setting.icon}{setting.name}</div>
+												</div>
+											)
 										}
-										{currentUser.firstName}</Link>
-								}
-								{settings.map((setting) => {
-
-									if (setting.name === 'Logout') {
-
 										return (
-											<div className="profile-menu-item mt-2 block p-4 hover:bg-loginbg  rounded-md cursor-pointer"
-												onClick={() => { handleCloseUserMenu(); logOut() }}
-												key={setting.name}
+											<Link href={setting.path} key={setting.name}
+												className="profile-menu-item mt-2 block p-4 hover:bg-loginbg  rounded-md cursor-pointer"
+												onClick={handleCloseUser}
 											>
 												<div className="flex gap-2"	>{setting.icon}{setting.name}</div>
-											</div>
+											</Link>
 										)
 									}
-									return (
-										<Link href={setting.path} key={setting.name}
-											className="profile-menu-item mt-2 block p-4 hover:bg-loginbg  rounded-md cursor-pointer"
-											onClick={handleCloseUserMenu}
-										>
-											<div className="flex gap-2"	>{setting.icon}{setting.name}</div>
-										</Link>
-									)
-								}
-								)}
-							</div>
-						}
+									)}
+								</div>
+							}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -134,3 +137,6 @@ function Navbar() {
 	);
 }
 export default Navbar;
+
+
+
