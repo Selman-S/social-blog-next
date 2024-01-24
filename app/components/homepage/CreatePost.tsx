@@ -2,10 +2,23 @@ import { Box, Card, Typography } from '@mui/material'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import CreatePostModal from './CreatePostModal'
+import { useSelector } from 'react-redux'
+import { selectUser } from '@/lib/redux/slices/userSlice'
+import { useRouter } from 'next/navigation'
+
 
 const CreatePostHomePage = () => {
  const [open, setOpen] = useState(false)
- const handleOpen = () => setOpen(true)
+ const router = useRouter()
+ const { currentUser } = useSelector(selectUser)
+ const handleOpen = () => {
+  if (currentUser?.uid) {
+   return setOpen(true)
+
+  } else {
+   router.push('/login')
+  }
+ }
 
  const handleClose = () => {
   setOpen(false)

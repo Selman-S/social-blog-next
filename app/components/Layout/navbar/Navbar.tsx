@@ -19,6 +19,7 @@ import useAuthCall from '@/service/useAuthCall';
 
 
 import SwipeableTemporaryDrawer from "./SwipeableTemporaryDrawer"
+import { AppBar, Button } from "@mui/material";
 
 
 
@@ -61,15 +62,15 @@ function Navbar() {
 		setAnchorElUser(null);
 	};
 
-	useEffect(() => {
-		if (!currentUser) {
-			redirect('/login')
-		}
-	}, [currentUser])
+	// useEffect(() => {
+	// 	if (!currentUser) {
+	// 		redirect('/login')
+	// 	}
+	// }, [currentUser])
 
 
 	return (
-		<nav className="navbar appbar bg-white px-6">
+		<AppBar className="navbar appbar bg-white px-6 sticky" component="nav">
 			<div className=''>
 				<div className='toolbar justify-between'>
 					<div className="box">
@@ -84,14 +85,14 @@ function Navbar() {
 						<div className=" flex items-center ">
 
 							<div className="profile-tooltip">
-								{currentUser && <div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUser} >
+								{currentUser ? (<div className="rounded-full w-12 h-12 bg-borderGray " onClick={handleOpenUser} >
 									{currentUser && (currentUser.photoURL ? <Image src={currentUser?.photoURL} alt='profile picture'
 										style={{ objectFit: "cover" }} width={50} height={50} sizes="cover" className="rounded-full w-12 h-12" /> :
 										<DefaultProfileIcon />
 
 									)
 									}
-								</div>
+								</div>) : <Button><Link href={"/login"} className="text-white bg-activeLink p-2 px-4 rounded">login</Link></Button>
 								}
 
 							</div>
@@ -133,7 +134,7 @@ function Navbar() {
 					</div>
 				</div>
 			</div>
-		</nav>
+		</AppBar>
 	);
 }
 export default Navbar;

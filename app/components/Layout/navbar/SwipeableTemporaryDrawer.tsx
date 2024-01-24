@@ -71,7 +71,7 @@ export default function SwipeableTemporaryDrawer() {
 			<React.Fragment>
 				<div className="md:hidden cursor-pointer" >
 
-					<IoMdMenu className="text-2xl" onClick={toggleDrawer(true)} />
+					<IoMdMenu className="text-2xl text-black" onClick={toggleDrawer(true)} />
 				</div>
 
 				<SwipeableDrawer

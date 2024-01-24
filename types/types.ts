@@ -20,6 +20,10 @@ export interface Owner {
   picture: string;
 }
 
+
+
+
+
 // User Full
 export interface UserFull  {
   id: string;

@@ -1,7 +1,7 @@
 /* Core */
 import { CurrentUser, Owner, UserFull } from '@/types/types'
 import { createSlice } from '@reduxjs/toolkit'
-import { getUserWithThunk, getUsersWithThunk } from './thunks'
+import {  getUserWithThunk, getUsersWithThunk } from './thunks'
 
 
 
@@ -70,6 +70,7 @@ export const userSlice = createSlice({
          state.error = 'Error'
          state.loading = false
        })
+ 
   },
 
 })

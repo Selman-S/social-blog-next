@@ -7,6 +7,7 @@ import { getPostsWithThunk } from '@/lib/redux/slices/postSlice/thunks';
 import { getUsersWithThunk } from '@/lib/redux/slices/userSlice/thunks';
 import { reduxStore } from '@/lib/redux';
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -32,12 +33,12 @@ export default async function RootLayout({
       },
       user: {
 
-        data: userState
+        data: userState,
       }
     }}>
 
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className} bg-loginbg`}>
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
 
             {children}

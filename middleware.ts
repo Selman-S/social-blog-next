@@ -3,13 +3,16 @@ import type { NextRequest } from 'next/server'
 
  
 // This function can be marked `async` if using `await` inside
-export default function middleware(request: NextRequest) {
+export default function middleware  (request: NextRequest) {
 
- 
- if (true) {
+ //  const { cookies } = request
+ //  console.log(cookies.get('uid'));
   
-  // return NextResponse.redirect(new URL('/login', request.url))
- }
+ // if (cookies.get('uid') === undefined) {
+  
+ //  return NextResponse.redirect(new URL('/login', request.url))
+ // }
+ //  return NextResponse.next()
 }
  
 // See "Matching Paths" below to learn more

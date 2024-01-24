@@ -6,17 +6,16 @@ import { getUsersWithThunk } from "@/lib/redux/slices/userSlice/thunks"
 
 
 const UsersCards = async () => {
- await reduxStore.dispatch(getUsersWithThunk())
  const users = reduxStore.getState().user.data
- console.log(users);
-
  return (
-  <Box sx={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
-   users
-   {/* {users.map((user) => (
-    <UserCard user={user} key={user.id} />
-   ))} */}
-  </Box>
+  <>
+   <div className="flex gap-1 flex-wrap">
+    users
+    {users.map((user) => (
+     <UserCard user={user} key={user.id} />
+    ))}
+   </div>
+  </>
  )
 }
 

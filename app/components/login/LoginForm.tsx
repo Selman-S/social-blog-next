@@ -1,9 +1,13 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import useAuthCall from '@/service/useAuthCall';
+
+import { useSelector } from 'react-redux';
+import { selectUser } from '@/lib/redux/slices/userSlice';
+import { useRouter } from 'next/navigation';
 
 const loginSchema = yup.object({
  email: yup.string()
@@ -24,7 +28,8 @@ type FormData = yup.InferType<typeof loginSchema>;
 
 const LoginForm = () => {
 
-
+ const { currentUser } = useSelector(selectUser)
+ const router = useRouter()
  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
   resolver: yupResolver(loginSchema)
  });
@@ -43,6 +48,12 @@ const LoginForm = () => {
  // const all = watch();
  // console.log(all);
 
+ useEffect(() => {
+  if (currentUser?.uid) {
+   router.push('/')
+
+  }
+ }, [currentUser])
 
 
 

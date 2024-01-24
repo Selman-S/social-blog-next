@@ -14,15 +14,26 @@ import usePostsCall from '@/service/usePostsCall';
 import { Box, Popover, Tooltip } from '@mui/material';
 
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@/lib/redux/slices/userSlice';
 
 
 export default function PostCard({ post }: { post: Post }) {
 
 	const { deletePost } = usePostsCall()
+	const router = useRouter()
+	const { currentUser } = useSelector(selectUser)
 
 	const handleRemove = (id: string) => {
 		console.log(id);
-		deletePost(id)
+		if (currentUser?.uid) {
+			return deletePost(id)
+
+		} else {
+			router.push('/login')
+		}
+
 	}
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 

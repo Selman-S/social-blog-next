@@ -92,7 +92,7 @@ const useAuthCall = () => {
         password
       );
       coloredToast("success", 'Logged in successfull')
-
+      router.push('/')
     } catch (error) {
       coloredToast("error", (error as Error).message);
     }
@@ -126,11 +126,18 @@ const useAuthCall = () => {
 
         console.log("observer updated displaya name", curUser);
 
+        document.cookie = `uid=${uid}; path=/; max-age=3600;`;
+        document.cookie = `firstName=${firstName}; path=/; max-age=3600;`;
+        document.cookie = `lastName=${lastName}; path=/; max-age=3600;`;
+        document.cookie = `email=${email}; path=/; max-age=3600;`;
+        document.cookie = `photoURL=${photoURL}; path=/; max-age=3600;`;
+
+
         dispatch(userSlice.actions.setCurrentUser(curUser))
-        router.push('/')
+
       } else {
         dispatch(userSlice.actions.setCurrentUser(null))
-        router.push('/login')
+
       }
     });
   };
