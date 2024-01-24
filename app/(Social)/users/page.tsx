@@ -6,9 +6,12 @@ import UsersCards from "@/app/components/users/UsersCards"
 const Userspage = () => {
 
   return (
-    <div className="flex">
+    <div className=" flex">
       <UserLeftSide />
-      <UsersCards />
+      <div className="p-5">
+
+        <UsersCards />
+      </div>
 
 
     </div>
