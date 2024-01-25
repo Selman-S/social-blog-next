@@ -1,7 +1,7 @@
 
+import ProfileDetail from "@/app/components/user/ProfileDetail"
 import UserLeftSide from "@/app/components/user/UserLeftSide"
-import { reduxStore } from "@/lib/redux"
-import { getUserWithThunk } from "@/lib/redux/slices/userSlice/thunks"
+import { coloredToast } from "@/lib/sweetalertToast/config"
 import { UserFull } from "@/types/types"
 import axios from "axios"
 
@@ -11,21 +11,17 @@ interface UserDetailPageProps {
   }
 }
 const getUserById = async (id: string): Promise<UserFull | undefined> => {
-  // Your code here
-
-
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/${id}`, {
       headers: {
         'app-id': process.env.NEXT_PUBLIC_APP_ID
       }
     })
-    console.log(response.data);
-
 
     return response.data
   } catch (error) {
     console.log(error);
+    coloredToast("error", (error as Error).message)
 
   }
 }
@@ -43,7 +39,7 @@ const UserDetailPage = async ({ params }: UserDetailPageProps) => {
     <div className=" flex">
       <UserLeftSide />
       <div className="p-5">
-        sadas
+        <ProfileDetail />
 
       </div>
 

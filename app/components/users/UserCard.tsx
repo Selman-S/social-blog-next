@@ -4,7 +4,7 @@ import { Owner } from '@/types/types'
 import { Button, Card, CardContent, CardMedia } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import UserDeleteButton from './UserDeleteButton'
 
 
@@ -13,7 +13,7 @@ interface UserCardProps {
 }
 const UserCard = ({ user }: UserCardProps) => {
 
-	const dispatch = useDispatch()
+
 	const users = useSelector(selectUser)
 	console.log(users);
 
