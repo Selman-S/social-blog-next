@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -214,8 +215,20 @@ const useAuthCall = () => {
       });
   };
 
+  const deleteUserFirebase = async () => {
+    if (auth.currentUser) {
+      deleteUser(auth.currentUser).then(() => {
 
-  return { registerWithEmail, logOut, userObserver, signIn, signUpWithGoogle, forgotPassword }
+        coloredToast("success", 'User deleted successfull')
+      }).catch((error) => {
+
+        coloredToast("error", (error as Error).message)
+      });
+    }
+  }
+
+
+  return { registerWithEmail, logOut, userObserver, signIn, signUpWithGoogle, forgotPassword, deleteUserFirebase }
 }
 
 export default useAuthCall

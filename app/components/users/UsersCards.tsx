@@ -1,12 +1,14 @@
-import { Owner } from "@/types/types"
+"use client"
+import { selectUser } from "@/lib/redux/slices/userSlice";
 import UserCard from "./UserCard"
-import { Box, Typography } from "@mui/material"
 import { reduxStore } from "@/lib/redux"
-import { getUsersWithThunk } from "@/lib/redux/slices/userSlice/thunks"
+import { useSelector } from "react-redux";
 
 
-const UsersCards = async () => {
-	const users = reduxStore.getState().user.data
+const UsersCards =  () => {
+	const users = useSelector(selectUser).data
+
+
 	return (
 		<>
 			<div className="flex justify-between items-center w-[calc(100vw-400px)]">
@@ -16,7 +18,7 @@ const UsersCards = async () => {
 				</h4>
 				<div className="text-activeLink text-[20px] cursor-pointer ">See all</div>
 			</div>
-			<div className="flex  gap-4 flex-wrap mt-4 ">
+			<div className="flex  gap-4 flex-wrap m-4 ">
 
 				{users.map((user) => (
 					<UserCard user={user} key={user.id} />

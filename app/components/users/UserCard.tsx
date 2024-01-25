@@ -1,17 +1,26 @@
+"use client"
+import { selectUser, userSlice } from '@/lib/redux/slices/userSlice'
 import { Owner } from '@/types/types'
-import { Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Typography } from '@mui/material'
+import { Button, Card, CardContent, CardMedia } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 interface UserCardProps {
 	user: Owner
 }
 const UserCard = ({ user }: UserCardProps) => {
+	const dispatch = useDispatch()
+	const users = useSelector(selectUser)
+	console.log(users);
+
+
+
 	return (
 		<Card sx={{ maxWidth: 240 }} className='rounded-lg'>
-			<div className='cursor-pointer'>
 
+			<Link href={`/users/${user.id}`} className='cursor-pointer'>
 				{user.picture ?
 
 					<Image
@@ -28,7 +37,8 @@ const UserCard = ({ user }: UserCardProps) => {
 						alt={user.firstName}
 					/>
 				}
-			</div>
+			</Link>
+
 			<CardContent>
 				<div className='text-[17px] text-[#050505] font-semibold'>
 					{user.firstName} {user.lastName}
@@ -41,9 +51,10 @@ const UserCard = ({ user }: UserCardProps) => {
 						View profile
 					</Link>
 				</Button>
-				<Button size="small" color="secondary" className='p-2 px-4 bg-btnGraybg text-textBlack'>
+				<Button onClick={() => dispatch(userSlice.actions.removeUser(user.id))} size="small" color="secondary" className='p-2 px-4 bg-btnGraybg hover:bg-[#D8DADF] text-textBlack'>
 					Delete
 				</Button>
+
 
 			</div>
 

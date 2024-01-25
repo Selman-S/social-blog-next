@@ -43,6 +43,9 @@ export const userSlice = createSlice({
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload
     },
+    removeUser : (state,action) => {
+      state.data = state.data.filter((user) => user.id !== action.payload)
+    },
   
     
   },

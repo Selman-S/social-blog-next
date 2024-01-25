@@ -4,12 +4,14 @@ import useAxios from "./useAxios"
 import { userSlice } from "@/lib/redux/slices/userSlice"
 import { coloredToast } from "@/lib/sweetalertToast/config"
 
+
 // Get List,
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
 const useUsersCall = () => {
  const dispatch = useDispatch()
  const { axiosWithAppId } = useAxios()
+
 
  const getUsers = async () => {
   dispatch(userSlice.actions.fetchStart())
@@ -65,11 +67,14 @@ const useUsersCall = () => {
  const deleteUser = async (id: string) => {
 
   try {
+
    const response = await axiosWithAppId.delete(`/user/${id}`)
    console.log(response.data);
+   coloredToast("success", 'User deleted successfull')
 
    return response
   } catch (error) {
+   coloredToast("error", (error as Error).message)
    console.log(error);
   }
  }
