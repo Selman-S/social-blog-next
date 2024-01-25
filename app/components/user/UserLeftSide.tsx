@@ -3,6 +3,7 @@ import { selectUser, userSlice } from "@/lib/redux/slices/userSlice";
 import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { IoMdArrowBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,11 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 const UserLeftSide = () => {
 	const users = useSelector(selectUser).data
 	const dispatch = useDispatch()
-	console.log(users)
-
-
-
-
+	const router = useRouter()
 	const handleAddFriend = (e: React.MouseEvent) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -26,6 +23,9 @@ const UserLeftSide = () => {
 		e.stopPropagation(); // Link bileşenine olayın yayılmasını önler
 		dispatch(userSlice.actions.removeUser(userId));
 	};
+	const goBack = () => {
+		router.back();
+	};
 
 	return (
 		<>
@@ -35,7 +35,7 @@ const UserLeftSide = () => {
 					<div className="side-header fixed p-4">
 
 						<div className="flex items-center gap-4 ">
-							<div className="text-xl text-[#696f77] cursor-pointer rounded-full p-2 hover:bg-loginbg">
+							<div onClick={goBack} className="text-xl text-[#696f77] cursor-pointer rounded-full p-2 hover:bg-loginbg">
 								<IoMdArrowBack />
 							</div>
 							<div>

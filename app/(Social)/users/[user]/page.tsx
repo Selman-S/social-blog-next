@@ -30,20 +30,18 @@ const getUserById = async (id: string): Promise<UserFull | undefined> => {
 
 const UserDetailPage = async ({ params }: UserDetailPageProps) => {
 
-  const user = getUserById(params.user)
-  console.log(user);
+  const user = await getUserById(params.user)
+
+
 
 
 
   return (
     <div className=" flex">
       <UserLeftSide />
-      <div className="p-5">
-        <ProfileDetail />
-
-      </div>
-
-
+      {user &&
+        <ProfileDetail user={user} />
+      }
     </div>
   )
 }

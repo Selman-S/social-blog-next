@@ -28,6 +28,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'plus.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+
+      {
+        protocol: 'https',
         hostname: 'scontent.fesb4-2.fna.fbcdn.net',
         port: '',
         pathname: '/**',
