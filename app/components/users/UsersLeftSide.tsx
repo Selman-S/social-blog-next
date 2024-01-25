@@ -41,7 +41,7 @@ const menuItems = [
   icon: <FaClipboardUser />
  },
 ]
-const UserLeftSide = () => {
+const UsersLeftSide = () => {
  return (
   <>
 
@@ -81,4 +81,4 @@ const UserLeftSide = () => {
  )
 }
 
-export default UserLeftSide
+export default UsersLeftSide
