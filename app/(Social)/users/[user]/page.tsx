@@ -1,3 +1,4 @@
+"use client"
 import { reduxStore } from "@/lib/redux"
 import { getUserWithThunk } from "@/lib/redux/slices/userSlice/thunks"
 
@@ -15,7 +16,7 @@ const UserDetailPage = async ({ params }: UserDetailPageProps) => {
 
 
   return (
-    <div>
+    <div className="mt-20">
       {userState?.firstName} {userState?.lastName}
     </div>
   )

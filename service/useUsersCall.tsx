@@ -17,7 +17,7 @@ const useUsersCall = () => {
   dispatch(userSlice.actions.fetchStart())
 
   try {
-   const response = await axiosWithAppId('/user')
+   const response = await axiosWithAppId('/user?page=2&limit=40')
    console.log(response.data);
    dispatch(userSlice.actions.setUsers(response.data.data))
 

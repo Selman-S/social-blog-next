@@ -5,12 +5,14 @@ import { Button, Card, CardContent, CardMedia } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
+import UserDeleteButton from './UserDeleteButton'
 
 
 interface UserCardProps {
 	user: Owner
 }
 const UserCard = ({ user }: UserCardProps) => {
+
 	const dispatch = useDispatch()
 	const users = useSelector(selectUser)
 	console.log(users);
@@ -51,9 +53,7 @@ const UserCard = ({ user }: UserCardProps) => {
 						View profile
 					</Link>
 				</Button>
-				<Button onClick={() => dispatch(userSlice.actions.removeUser(user.id))} size="small" color="secondary" className='p-2 px-4 bg-btnGraybg hover:bg-[#D8DADF] text-textBlack'>
-					Delete
-				</Button>
+				<UserDeleteButton userId={user.id} />
 
 
 			</div>

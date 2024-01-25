@@ -33,6 +33,7 @@ const config: Config = {
       btnbgHover: "#dceaf9",
       btnText: "#0054d1",
       btnGraybg: "#e4e6eb",
+      iconBg:"#d8dadf",
     },
   },
   plugins: [],
