@@ -92,7 +92,7 @@ function Navbar() {
 
 									)
 									}
-								</div>) : <Button><Link href={"/login"} className="text-white bg-activeLink p-2 px-4 rounded">login</Link></Button>
+								</div>) : <Button><Link href={"/login"} className='bg-main rounded-md  p-3 text-white flex items-center justify-center gap-2 text-[15px] cursor-pointer  font-medium'>Login</Link></Button>
 								}
 
 							</div>
