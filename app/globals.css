@@ -142,3 +142,14 @@
 ::-webkit-scrollbar-track:hover {
   background-color: #f0f1f2;
 }
+/* .profile-detail .profile-bar {
+  height: 0px;
+  overflow: hidden;
+}
+.profile-detail .profile-bar.sticy-profile-bar {
+  height: 72px;
+  overflow: auto;
+  position: fixed;
+  top: 80px;
+  width: calc(100vw - 360px);
+} */
