@@ -13,6 +13,7 @@ import StickyProfileBar from './profiledetail/StickyProfileBar'
 import { writeLocation } from '@/utils/writeLocation'
 import UserDetailImage from './profiledetail/UserDetailImage'
 import UserDetailUserInfo from './profiledetail/UserDetailUserInfo'
+import UserDetailPosts from './profiledetail/UserDetailPosts'
 
 interface Props {
 	user: UserFull
@@ -50,26 +51,7 @@ const ProfileDetail = ({ user }: Props) => {
 
 			<StickyProfileBar nuser={nuser} />
 
-			<div className="justify-center flex flex-col items-center">
-				<div className="flex  w-full max-w-[1250px] items-stretch shrink-0 border">
-					<div className='basis-[360px] grow-[18] shrink-1 m-2 bg-borderGray user-det-left'>
-						<div className='user-intro'>
-							<div>Intro</div>
-							<div>
-								<div className="email">{nuser.email}</div>
-								<div className="phone">{nuser.phone}</div>
-								<div className="location">{writeLocation(nuser.location)}</div>
-								<div className="gender">{nuser.email}</div>
-								<div className="birthday">{nuser.email}</div>
-
-							</div>
-						</div>
-						<div className='user-photos'></div>
-						<div className='user-friends'></div>
-					</div>
-					<div className='basis-[500px] shrink-1 grow-[25] m-2 bg-borderGray user-det-right'>Right</div>
-				</div>
-			</div>
+			<UserDetailPosts nuser={nuser} />
 		</div >
 	)
 }

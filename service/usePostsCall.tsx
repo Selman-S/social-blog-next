@@ -51,9 +51,6 @@ const usePostsCall = () => {
 
   try {
    const response = await axiosWithAppId(`/user/${id}/post`)
-   console.log(response)
-
-   dispatch(postSlice.actions.setPosts(response.data.data))
    return response
   } catch (error) {
    console.log(error);

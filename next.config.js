@@ -6,7 +6,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'img.dummyapi.io',
         port: '',
-        pathname: '/photo**',
+        pathname: '/**',
       },
       {
         protocol: 'https',

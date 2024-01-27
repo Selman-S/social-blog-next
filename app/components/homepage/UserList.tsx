@@ -1,21 +1,28 @@
 'use client'
+import { postSlice } from "@/lib/redux"
 import { selectUser } from "@/lib/redux/slices/userSlice"
 import usePostsCall from "@/service/usePostsCall"
 import Image from "next/image"
 import Link from "next/link"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 
 
 
 const UserList = () => {
 	const { getPostByUserId, getPosts } = usePostsCall()
-
+	const dispatch = useDispatch()
 	const users = useSelector(selectUser);
 
 	const handleClick = (id: string) => {
-		console.log("click");
-		getPostByUserId(id)
+		const fetchPosts = async () => {
+			const posts = await getPostByUserId(id);
+			if (posts && posts.data && posts.data.data) {
+				dispatch(postSlice.actions.setPosts(posts.data.data))
+			}
+		};
+		fetchPosts();
+
 	}
 
 	const handleAllClick = () => {

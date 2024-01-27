@@ -1,6 +1,14 @@
+"use client"
 import { Location } from '@/types/types';
+import { formatBirthDate } from '@/utils/formattedBrithDay';
 import { writeLocation } from '@/utils/writeLocation';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { FaPhone } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { TbGenderBigender } from "react-icons/tb";
+import { FaBirthdayCake } from "react-icons/fa";
+import usePostsCall from '@/service/usePostsCall';
 
 interface NewUser {
  img: string;
@@ -22,18 +30,32 @@ interface Props {
  nuser: NewUser
 }
 const UserDetailPosts = ({ nuser }: Props) => {
+ const [posts, setPosts] = useState(null)
+ const { getPostByUserId } = usePostsCall()
+ useEffect(() => {
+
+  const fetchPosts = async () => {
+   const posts = await getPostByUserId(nuser.id);
+   if (posts && posts.data && posts.data.data) {
+    console.log(posts.data.data);
+   }
+  };
+
+  fetchPosts();
+ }
+  , [])
  return (
   <div className="justify-center flex flex-col items-center">
-   <div className="flex  w-full max-w-[1250px] items-stretch shrink-0 border">
-    <div className='basis-[360px] grow-[18] shrink-1 m-2 bg-borderGray user-det-left'>
-     <div className='user-intro'>
-      <div>Intro</div>
-      <div>
-       <div className="email">{nuser.email}</div>
-       <div className="phone">{nuser.phone}</div>
-       <div className="location">{writeLocation(nuser.location)}</div>
-       <div className="gender">{nuser.email}</div>
-       <div className="birthday">{nuser.email}</div>
+   <div className="flex  w-full max-w-[1250px] items-stretch shrink-0 ">
+    <div className='basis-[360px] grow-[18] shrink-1 m-2 user-det-left'>
+     <div className='user-intro bg-white rounded-lg p-4 shadow'>
+      <div className='text-textBlack text-xl font-bold'>Intro</div>
+      <div className="text-[15px] text-linkColor flex flex-col gap-4 mt-4">
+       <div className="email flex items-center gap-2"><MdOutlineAlternateEmail className="text-xl" /> {nuser.email}</div>
+       <div className="phone flex items-center gap-2"><FaPhone className="text-xl" /> {nuser.phone}</div>
+       <div className="location flex items-center gap-2"><FaLocationDot className="text-xl" /> {writeLocation(nuser.location)}</div>
+       <div className="gender flex items-center gap-2"><TbGenderBigender className="text-xl" /> {nuser.gender}</div>
+       <div className="birthday flex items-center gap-2"><FaBirthdayCake className="text-xl" /> {formatBirthDate(nuser.dateOfBirth)}</div>
 
       </div>
      </div>
