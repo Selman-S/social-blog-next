@@ -146,10 +146,9 @@
   height: 0px;
   overflow: hidden;
 }
-.profile-detail .profile-bar.sticy-profile-bar {
-  height: 72px;
-  overflow: auto;
-  position: fixed;
-  top: 80px;
-  width: calc(100vw - 360px);
-} */
+*/
+@media (max-width: 768px) {
+  .profile-detail .stickybox {
+    top: 54px !important;
+  }
+}
