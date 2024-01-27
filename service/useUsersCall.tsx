@@ -27,6 +27,19 @@ const useUsersCall = () => {
    dispatch(userSlice.actions.fetchError(error))
   }
  }
+ const getFriendsUserPage = async () => {
+
+
+  try {
+   const response = await axiosWithAppId('/user?page=2&limit=30')
+
+
+   return response.data.data
+  } catch (error) {
+   console.log(error);
+   dispatch(userSlice.actions.fetchError(error))
+  }
+ }
 
  const getUserById = async (id: string) => {
   dispatch(userSlice.actions.fetchStart())
@@ -79,7 +92,7 @@ const useUsersCall = () => {
   }
  }
 
- return { getUsers, deleteUser, createUserInDummyDb, getUserById }
+ return { getUsers, deleteUser, createUserInDummyDb, getUserById, getFriendsUserPage }
 
 }
 

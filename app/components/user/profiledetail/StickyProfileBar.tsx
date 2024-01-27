@@ -54,7 +54,7 @@ const StickyProfileBar = ({ nuser }: Props) => {
   <StickyBox offsetTop={76} className={`h-0 overflow-hidden stickybox transition-all duration-500 ${isSticky ? 'h-[72px]' : ''}`}>
 
    <div className={`justify-center flex flex-col items-center profile-bar`} ref={ref} >
-    <div className="flex justify-between items-center p-2 w-full max-w-[1250px] bg-white shadow">
+    <div className="flex justify-between items-center p-2 w-full z-100 bg-white shadow">
      <Button className="	flex gap-2 items-center  p-2 rounded-lg hover:bg-btnGraybg">
 
       <div className="w-10 h-10 overflow-hidden rounded-full	flex justify-center items-center  ">

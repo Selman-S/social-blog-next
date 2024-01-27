@@ -152,3 +152,6 @@
     top: 54px !important;
   }
 }
+.profile-detail .stickybox {
+  z-index: 100;
+}

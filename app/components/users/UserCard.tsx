@@ -20,12 +20,13 @@ const UserCard = ({ user }: UserCardProps) => {
 
 
 	return (
-		<Card sx={{ maxWidth: 240 }} className='rounded-lg'>
+		<Card sx={{ maxWidth: 240 }} className='rounded-lg '>
 
 			<Link href={`/users/${user.id}`} className='cursor-pointer'>
 				{user.picture ?
 
 					<Image
+
 						src={user?.picture}
 						width={240}
 						height={240}
@@ -41,12 +42,12 @@ const UserCard = ({ user }: UserCardProps) => {
 				}
 			</Link>
 
-			<CardContent>
-				<div className='text-[17px] text-[#050505] font-semibold'>
+			<CardContent className="h-12 p-2">
+				<div className='text-[14px] md:text-[17px] text-[#050505] font-semibold'>
 					{user.firstName} {user.lastName}
 				</div>
 			</CardContent>
-			<div className='p-4 flex flex-col gap-2'>
+			<div className='p-2 md:p-4 flex flex-col gap-2'>
 				<Button size="small" color="primary" className='p-2 px-4 bg-btnbg text-btnText hover:bg-btnbgHover'>
 
 					<Link href={`/users/${user.id}`}>
