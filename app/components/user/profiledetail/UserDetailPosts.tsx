@@ -1,5 +1,5 @@
 "use client"
-import { Location } from '@/types/types';
+import { Location, PostFull } from '@/types/types';
 import { formatBirthDate } from '@/utils/formattedBrithDay';
 import { writeLocation } from '@/utils/writeLocation';
 import React, { useEffect, useState } from 'react'
@@ -9,6 +9,10 @@ import { FaLocationDot } from "react-icons/fa6";
 import { TbGenderBigender } from "react-icons/tb";
 import { FaBirthdayCake } from "react-icons/fa";
 import usePostsCall from '@/service/usePostsCall';
+import { VscSettings } from "react-icons/vsc";
+import { Button } from '@mui/material';
+import PostCard from '../../homepage/PostCard';
+import { NoDataMsg } from '../../homepage/DataFetchMsg';
 
 interface NewUser {
  img: string;
@@ -30,14 +34,14 @@ interface Props {
  nuser: NewUser
 }
 const UserDetailPosts = ({ nuser }: Props) => {
- const [posts, setPosts] = useState(null)
+ const [posts, setPosts] = useState<PostFull[] | null>(null)
  const { getPostByUserId } = usePostsCall()
  useEffect(() => {
 
   const fetchPosts = async () => {
    const posts = await getPostByUserId(nuser.id);
    if (posts && posts.data && posts.data.data) {
-    console.log(posts.data.data);
+    setPosts(posts.data.data);
    }
   };
 
@@ -47,6 +51,7 @@ const UserDetailPosts = ({ nuser }: Props) => {
  return (
   <div className="justify-center flex flex-col items-center">
    <div className="flex  w-full max-w-[1250px] items-stretch shrink-0 ">
+    {/* left-side */}
     <div className='basis-[360px] grow-[18] shrink-1 m-2 user-det-left'>
      <div className='user-intro bg-white rounded-lg p-4 shadow'>
       <div className='text-textBlack text-xl font-bold'>Intro</div>
@@ -62,7 +67,22 @@ const UserDetailPosts = ({ nuser }: Props) => {
      <div className='user-photos'></div>
      <div className='user-friends'></div>
     </div>
-    <div className='basis-[500px] shrink-1 grow-[25] m-2 bg-borderGray user-det-right'>Right</div>
+    {/* left-side */}
+
+    {/* right side */}
+    <div className='basis-[500px] shrink-1 grow-[25] m-2 flex flex-col gap-4  user-det-right'>
+     <div className='bg-white rounded-lg post-create px-4 p-2 shadow items-center flex justify-between'>
+      <div className="text-xl text-textBlack font-bold">Posts</div>
+      <Button className='bg-btnGraybg text-[15px] font-semibold flex gap-2  hover:bg-iconBg p-2 rounded-md '><VscSettings /> Filters</Button>
+     </div>
+     {!posts?.length && <NoDataMsg />}
+     {
+      posts && posts.map((post) => (
+       <PostCard key={post.id} post={post} />
+      ))
+     }
+    </div>
+    {/* right side */}
    </div>
   </div>
  )

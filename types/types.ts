@@ -39,6 +39,9 @@ export interface UserFull  {
   phone: string;
   location: Location;
 }
+export interface DetailUSerFull extends   UserFull {
+img: string;
+}
 
 
 // Post Full
