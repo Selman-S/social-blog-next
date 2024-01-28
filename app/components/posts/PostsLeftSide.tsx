@@ -58,7 +58,7 @@ const PostsLeftSide = () => {
      </div>
      <div className='menu-items flex flex-col mt-4'>
       {menuItems.map((item, i) => (
-       <div className={`flex items-center p-2 rounded-lg  hover:bg-loginbg  text-[24px] cursor-pointer ${i == 0 && "bg-loginbg"} `}>
+       <div key={item.id} className={`flex items-center p-2 rounded-lg  hover:bg-loginbg  text-[24px] cursor-pointer ${i == 0 && "bg-loginbg"} `}>
         <div className='flex items-center justify-between w-full'>
          <div className='flex items-center '>
 

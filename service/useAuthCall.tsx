@@ -20,6 +20,7 @@ import { coloredToast } from '@/lib/sweetalertToast/config';
 import useUsersCall from './useUsersCall';
 
 const useAuthCall = () => {
+  console.log('useAuthCall')
   const dispatch = useDispatch();
   const { createUserInDummyDb, getUserById } = useUsersCall()
   const router = useRouter();

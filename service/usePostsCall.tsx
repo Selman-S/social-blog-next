@@ -10,11 +10,13 @@ import { coloredToast } from "@/lib/sweetalertToast/config"
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
 const usePostsCall = () => {
+ console.log('usePostsCall');
+
  const dispatch = useDispatch()
  const { axiosWithAppId } = useAxios()
 
  const getPosts = async () => {
-
+  console.log('getPosts');
   try {
    const response = await axiosWithAppId('/post?limit=50')
    console.log(response.data);
@@ -27,6 +29,7 @@ const usePostsCall = () => {
  }
 
  const getPostById = async (id: string) => {
+  console.log('getPostById');
 
   try {
    const response = await axiosWithAppId(`/post/${id}`)
@@ -35,20 +38,9 @@ const usePostsCall = () => {
    console.log(error);
   }
  }
- const getTags = async () => {
-
-  try {
-   const response = await axiosWithAppId(`/tag`)
-   console.log(response.data);
-
-   return response
-  } catch (error) {
-   console.log(error);
-  }
- }
 
  const getPostByUserId = async (id: string) => {
-
+  console.log('getPostByUserId');
   try {
    const response = await axiosWithAppId(`/user/${id}/post`)
    return response
@@ -58,7 +50,7 @@ const usePostsCall = () => {
  }
 
  const createPost = async (post: PostCreate) => {
-
+  console.log('createPost');
   try {
    const response = await axiosWithAppId.post(`/post/create`, post)
    console.log(response.data);
@@ -72,7 +64,7 @@ const usePostsCall = () => {
  }
 
  const deletePost = async (id: string) => {
-
+  console.log('deletePost');
   try {
    const response = await axiosWithAppId.delete(`/post/${id}`)
    console.log(response.data);
@@ -86,7 +78,7 @@ const usePostsCall = () => {
   }
  }
 
- return { getPosts, getPostById, createPost, deletePost, getPostByUserId, getTags }
+ return { getPosts, getPostById, createPost, deletePost, getPostByUserId }
 
 }
 

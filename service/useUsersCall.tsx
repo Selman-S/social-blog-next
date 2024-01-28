@@ -9,6 +9,7 @@ import { coloredToast } from "@/lib/sweetalertToast/config"
 // Get List By User, Get List By Tag, Get Post By Id,
 // Create Post, Update Post, Delete Post
 const useUsersCall = () => {
+ console.log('useUsersCall')
  const dispatch = useDispatch()
  const { axiosWithAppId } = useAxios()
 
