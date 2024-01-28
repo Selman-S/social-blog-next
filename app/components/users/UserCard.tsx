@@ -1,5 +1,4 @@
 "use client"
-import { selectUser, userSlice } from '@/lib/redux/slices/userSlice'
 import { Owner } from '@/types/types'
 import { Button, Card, CardContent, CardMedia } from '@mui/material'
 import Image from 'next/image'
@@ -12,12 +11,6 @@ interface UserCardProps {
 	user: Owner
 }
 const UserCard = ({ user }: UserCardProps) => {
-
-
-	const users = useSelector(selectUser)
-	console.log(users);
-
-
 
 	return (
 		<Card sx={{ maxWidth: 240 }} className='rounded-lg '>

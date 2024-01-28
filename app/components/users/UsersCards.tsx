@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const UsersCards = () => {
 	const users = useSelector(selectUser).data
 
-
 	return (
 		<>
 			<div className="flex justify-between items-center md:w-[calc(100vw-440px)]">
