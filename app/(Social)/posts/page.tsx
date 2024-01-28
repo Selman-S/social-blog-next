@@ -1,5 +1,6 @@
-import CreatePost from "@/app/components/posts/CreatePost"
-import PostList from "@/app/components/homepage/PostList"
+
+import PostsLeftSide from "@/app/components/posts/PostsLeftSide"
+import PostsCards from "@/app/components/posts/PostsCards"
 
 
 
@@ -9,10 +10,14 @@ const PostsPage = () => {
 
 
   return (
-    <div>
-      <h1>Posts Page</h1>
-      <CreatePost />
-      {/* <PostList /> */}
+    <div className=" flex">
+      <PostsLeftSide />
+      <div className="p-5 flex items-center flex-col">
+
+        <PostsCards />
+      </div>
+
+
     </div>
   )
 }
