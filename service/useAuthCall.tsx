@@ -38,7 +38,6 @@ const useAuthCall = () => {
 
 
     try {
-      //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
 
       const regi = await createUserInDummyDb({ firstName, lastName, email })
       console.log(regi);
@@ -63,18 +62,6 @@ const useAuthCall = () => {
 
       console.log(auth.currentUser);
 
-      //? kullanıcı profilini güncellemek için kullanılan firebase metodu
-      // if (auth.currentUser) {
-      //   await updateProfile(auth.currentUser, {
-      //     displayName: firstName + '&' + lastName + '#' + (regi?.data?.id ?? ''),
-      //     photoURL: picture,
-      //   });
-      //   coloredToast("success", 'Registered successfull')
-      // } else {
-      //   console.error('No user is currently signed in');
-      // }
-
-
     } catch (error) {
       console.log(error);
       coloredToast("error", (error as Error).message);
@@ -82,12 +69,10 @@ const useAuthCall = () => {
     }
   };
 
-  //* https://console.firebase.google.com/
-  //* => Authentication => sign-in-method => enable Email/password
 
   const signIn = async (email: string, password: string) => {
     try {
-      //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
+
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -101,7 +86,7 @@ const useAuthCall = () => {
   };
 
   const userObserver = () => {
-    //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
+
     onAuthStateChanged(auth, (user) => {
 
       if (user) {
@@ -151,13 +136,6 @@ const useAuthCall = () => {
     coloredToast("success", 'Logged out successfull')
   };
 
-  //* https://console.firebase.google.com/
-  //* => Authentication => sign-in-method => enable Google
-  //! Google ile girişi enable yap
-  //* => Authentication => settings => Authorized domains => add domain
-  //! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
-
-
   const signUpWithGoogle = async () => {
     //? Google ile giriş yapılması için kullanılan firebase metodu
     const provider = new GoogleAuthProvider();
@@ -184,24 +162,7 @@ const useAuthCall = () => {
     } catch (error) {
 
     }
-    // .then((result) => {
-    //   console.log("google", result);
-    //   console.log("google", auth.currentUser);
 
-
-    //   if (auth.currentUser) {
-    //     updateProfile(auth.currentUser, {
-    //       displayName: result.user?.displayName,
-    //       photoURL: result.user?.photoURL,
-    //     });
-    //   } else {
-    //     console.error('No user is currently signed in');
-    //   }
-    // })
-    // .catch((error) => {
-    //   // Handle Errors here.
-    //   console.log(error);
-    // });
   };
 
 

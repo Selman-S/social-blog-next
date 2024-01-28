@@ -61,7 +61,7 @@ const useUsersCall = () => {
   const data = {
    firstName,
    lastName,
-   email,
+   email
   }
 
   try {
