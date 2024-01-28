@@ -62,12 +62,6 @@ function Navbar() {
 		setAnchorElUser(null);
 	};
 
-	// useEffect(() => {
-	// 	if (!currentUser) {
-	// 		redirect('/login')
-	// 	}
-	// }, [currentUser])
-
 
 	return (
 		<AppBar className="navbar appbar bg-white px-6 sticky" component="nav">
@@ -99,7 +93,7 @@ function Navbar() {
 							{currentUser &&
 								<div className={`${anchorElUser ? 'open' : ''} profile-menu`}>
 									{currentUser.firstName &&
-										<Link href={"/profile"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
+										<Link href={"/users/"} className=' mt-2  p-4 hover:bg-loginbg flex items-center person  gap-6 rounded-md cursor-pointer'>
 											{currentUser && currentUser.photoURL ? <Image src={currentUser?.photoURL} style={{ objectFit: "cover", height: "30px" }} alt='profile picture' width={30} height={30} className="rounded-full" /> :
 												<DefaultProfileIcon />
 											}

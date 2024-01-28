@@ -24,7 +24,12 @@ const UserDetailImage = ({ nuser }: Props) => {
 
     <div className='flex flex-col xl:flex-row gap-4 items-center xl:justify-start'>
      <div className='z-10 '>
-      <Image src={nuser.picture} width={168} height={168} alt={nuser.firstName} className='rounded-full border-4 border-white   -mt-[72px]' />
+      {nuser.picture ?
+       <Image src={nuser.picture} width={168} height={168} alt={nuser.firstName} className='rounded-full border-4 border-white   -mt-[72px]' />
+       :
+       <Image src="/assets/defaultprf.png" width={168} height={168} alt={nuser.firstName} className='rounded-full border-4 border-white   -mt-[72px]' />
+
+      }
      </div>
      <div className='text-center mb-4 xl:text-left xl:mb-0'>
       <div className='text-[32px] font-bold text-black mt-6'>{nuser.firstName} {nuser.lastName}</div>
